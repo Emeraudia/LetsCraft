@@ -32,9 +32,9 @@ func change_color(c):
 	
 #relocalise la piece a la positon p
 func setPos(p):
-	position.x = origin[0]+p[0]
-	position.y = origin[1]+p[1]
-	#position.z = origin[2]+p[2]
+	position.x = position.x+p[0]
+	position.y = position.y+p[1]
+	position.z = position.z+p[2]
 	
 	
 func getPosPlan():

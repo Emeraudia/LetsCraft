@@ -18,6 +18,8 @@ enum TranslationMode {
 var pieceClicked = false
 var mode = SelectionMode.Only
 var translate = TranslationMode.Off
+var dragDist = 0
+var mouseOrigin = Vector3(0,0,0)
 var mousePosOnClick = Vector2(0,0)
 var mouseCurrentPos = Vector2(0,0)
 var listSelection = Array()
@@ -46,22 +48,30 @@ func _process(_delta):
 	if(!listSelection.is_empty() && Input.is_action_pressed("click_gauche") && translate != TranslationMode.Off):
 		
 		if(translate == TranslationMode.Plan):
-			var mouseOrigin = Vector3(0,0,0)
 			
 			
 			
 			mouseCurrentPos = get_viewport().get_mouse_position()
 			
 			if(Input.is_action_just_pressed("click_gauche")):
-				mouseOrigin = $Camera3D.project_position(mouseCurrentPos,10)
-				print("ca drag un max")
+				dragDist = $Camera3D.get_camera_transform().origin.distance_to(listSelection[-1].get_child(0).origin)
+				mouseOrigin = $Camera3D.project_position(
+					mouseCurrentPos, 
+					dragDist
+				)
+				print(mouseOrigin)
 			
-			var mouseCurrentPosGlobal = $Camera3D.project_position(mouseCurrentPos,10)- mouseOrigin
+			var mouseCurrentPosGlobal = $Camera3D.project_position(mouseCurrentPos,dragDist) - mouseOrigin
+
 			var camera_transform = $Camera3D.get_camera_transform()
 			var camera_rotation = camera_transform.basis
 			var movement = (camera_rotation * mouseCurrentPosGlobal)
 			for i in listSelection:
 				i.get_child(0).setPos(movement)
+			mouseOrigin = $Camera3D.project_position(
+				mouseCurrentPos, 
+				dragDist
+			)
 			#print(mousePosOnClick.x-mouseCurrentPos.x,mousePosOnClick.y-mouseCurrentPos.y)
 		
 		
