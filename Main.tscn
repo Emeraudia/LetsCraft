@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cor1wiuenw6yt"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_ltjda"]
+[ext_resource type="PackedScene" uid="uid://cqnvk7yl413ja" path="res://Pièces.tscn" id="1_qoeyq"]
+
+[node name="main" type="Node"]
+script = ExtResource("1_ltjda")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.979558, 0.0379115, -0.197559, 0, 0.982081, 0.188461, 0.201163, -0.184609, 0.962005, 0, 1.40364, 3.19162)
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.821289, 0.570513, 0, -0.570513, 0.821289, 0, 1.50353, 0.34135)
+
+[node name="piece" parent="." instance=ExtResource("1_qoeyq")]
+
+[node name="piece2" parent="." instance=ExtResource("1_qoeyq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
