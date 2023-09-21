@@ -17,6 +17,3 @@ transform = Transform3D(1, 0, 0, 0, 0.821289, 0.570513, 0, -0.570513, 0.821289, 
 
 [node name="piece2" parent="." instance=ExtResource("1_qoeyq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-
-[node name="Node3D" type="Node3D" parent="piece2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
