@@ -15,8 +15,11 @@ enum TranslationMode {
 	Plan,
 	Profondeur,
 }
+
+var uiFocus = false
+
 var pieceClicked = false
-var mode = SelectionMode.Only
+var mode = SelectionMode.Off
 var translate = TranslationMode.Off
 var dragDist = 0
 var mouseOrigin = Vector3(0,0,0)
@@ -32,10 +35,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	selection_mode()
+	# selection_mode()
 	
 	#selection
-	if(Input.is_action_pressed("click_gauche") && pieceClicked == false && mode != SelectionMode.Off):
+	if(Input.is_action_pressed("click_gauche") && pieceClicked == false && mode != SelectionMode.Off && !uiFocus):
 		unselectAll()
 	elif(Input.is_action_pressed("click_gauche")):
 		pieceClicked = false
@@ -48,9 +51,7 @@ func _process(_delta):
 	if(!listSelection.is_empty() && Input.is_action_pressed("click_gauche") && translate != TranslationMode.Off):
 		
 		if(translate == TranslationMode.Plan):
-			
-			
-			
+		
 			mouseCurrentPos = get_viewport().get_mouse_position()
 			
 			if(Input.is_action_just_pressed("click_gauche")):
@@ -110,3 +111,22 @@ func unselectAll():
 func reset_mode():
 	mode = SelectionMode.Off
 	translate = TranslationMode.Off
+
+func _on_editor_option_button(index):
+	reset_mode()
+	match index:
+		0:
+			mode = SelectionMode.Only
+		1:
+			mode = SelectionMode.Multi
+		2:
+			translate = TranslationMode.Plan
+
+
+
+
+func _on_editor_mouse_entered():
+	uiFocus = false
+
+func _on_editor_mouse_exited():
+	uiFocus = true
