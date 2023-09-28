@@ -11,7 +11,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.00799191)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.33013, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.707107, -0.40558, -0.579228, 0, 0.819152, -0.573576, 0.707107, -0.40558, -0.579228, -3, -2, -3)
-
-[node name="Camera3D2" type="Camera3D" parent="."]
-transform = Transform3D(0.707107, -0.40558, 0.579228, 0, 0.819152, 0.573576, -0.707107, -0.40558, 0.579228, 3, 2, 3)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 0, 0)
