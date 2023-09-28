@@ -14,7 +14,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if(enter && Input.is_action_pressed("click_gauche")):
+	if(enter && Input.is_action_just_pressed("click_gauche")):
 		emit_signal("clicked",get_parent())
 
 func _on_mouse_entered():
