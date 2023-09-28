@@ -15,9 +15,16 @@ enum TranslationMode {
 	Plan,
 	Profondeur,
 }
+enum CreationMode {
+	Off,
+	On,
+}
+
 var pieceClicked = false
 var mode = SelectionMode.Only
 var translate = TranslationMode.Off
+var creation = CreationMode.Off
+var pieceNb = 1
 var dragDist = 0
 var mouseOrigin = Vector3(0,0,0)
 var mousePosOnClick = Vector2(0,0)
@@ -34,17 +41,27 @@ func _ready():
 func _process(_delta):
 	selection_mode()
 	
+	
+	#Creation d'une piece
+	if(creation != CreationMode.Off && Input.is_action_just_pressed("click_gauche")):
+		var scene = load("res://Pieces.tscn")
+		var instance = scene.instantiate()
+		add_child(instance)
+		instance.get_child(0).clicked.connect(select_piece)
+
+	
+	
 	#selection
 	if(Input.is_action_pressed("click_gauche") && pieceClicked == false && mode != SelectionMode.Off):
 		unselectAll()
 	elif(Input.is_action_pressed("click_gauche")):
 		pieceClicked = false
+		
+	#Change color of the selection
 	for i in listSelection:
 		i.get_child(0).change_color(Color(1, 1, 0, 1.0))
-	#mouvement
-	if(Input.is_action_just_pressed("click_gauche")):
-		mousePosOnClick = get_viewport().get_mouse_position()
 	
+	#mouvement
 	if(!listSelection.is_empty() && Input.is_action_pressed("click_gauche") && translate != TranslationMode.Off):
 		
 		if(translate == TranslationMode.Plan):
@@ -59,7 +76,6 @@ func _process(_delta):
 					mouseCurrentPos, 
 					dragDist
 				)
-				print(mouseOrigin)
 			
 			var mouseCurrentPosGlobal = $Camera3D.project_position(mouseCurrentPos,dragDist) - mouseOrigin
 
@@ -72,7 +88,7 @@ func _process(_delta):
 				mouseCurrentPos, 
 				dragDist
 			)
-			#print(mousePosOnClick.x-mouseCurrentPos.x,mousePosOnClick.y-mouseCurrentPos.y)
+
 		
 		
 
@@ -91,6 +107,9 @@ func selection_mode():
 	elif(Input.is_action_pressed("Profondeur")):
 		reset_mode()
 		translate = TranslationMode.Profondeur
+	elif(Input.is_action_pressed("Create")):
+		reset_mode()
+		creation = CreationMode.On
 
 #recupere la derniere piece cliquer et l'ajoute a la liste de selection en fonction du mode
 func select_piece(node):
@@ -110,3 +129,4 @@ func unselectAll():
 func reset_mode():
 	mode = SelectionMode.Off
 	translate = TranslationMode.Off
+	creation = CreationMode.Off
