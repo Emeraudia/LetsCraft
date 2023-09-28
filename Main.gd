@@ -46,6 +46,7 @@ func _process(_delta):
 	if(creation != CreationMode.Off && Input.is_action_just_pressed("click_gauche")):
 		var scene = load("res://Pieces.tscn")
 		var instance = scene.instantiate()
+		instance.get_child(0).setPos([-2,0,0])
 		add_child(instance)
 		instance.get_child(0).clicked.connect(select_piece)
 
