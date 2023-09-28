@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://clana0i8mfqeg"]
+
+[ext_resource type="Script" path="res://anchor.gd" id="1_7k4cm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_18i58"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cxjkg"]
+albedo_color = Color(0.666667, 0, 0.666667, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_32s62"]
+material = SubResource("StandardMaterial3D_cxjkg")
+
+[node name="Anchor" type="Area3D"]
+script = ExtResource("1_7k4cm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_18i58")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_32s62")
