@@ -15,6 +15,13 @@ run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=6
+window/vsync/vsync_mode=2
+
 [input]
 
 click_gauche={
@@ -46,3 +53,5 @@ Profondeur={
 [rendering]
 
 renderer/rendering_method="mobile"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
