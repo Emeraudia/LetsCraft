@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgal4jftyq5k1"]
+
+[ext_resource type="Script" path="res://Piece.gd" id="1_i45wf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1nxkx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hg6fc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ja0s1"]
+
+[node name="piece" type="Node3D"]
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("1_i45wf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_1nxkx")
+
+[node name="mesh" type="MeshInstance3D" parent="Area3D"]
+mesh = SubResource("BoxMesh_hg6fc")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_ja0s1")
+
+[connection signal="mouse_entered" from="Area3D" to="Area3D" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Area3D" to="Area3D" method="_on_mouse_exited"]
