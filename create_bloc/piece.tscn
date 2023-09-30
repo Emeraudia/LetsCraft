@@ -13,7 +13,7 @@ script = ExtResource("1_t8w5o")
 
 [node name="Obj" type="Area3D" parent="ObjetListe"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ObjetListe/Obj"]
+[node name="Mesh" type="MeshInstance3D" parent="ObjetListe/Obj"]
 mesh = SubResource("BoxMesh_61k4y")
 skeleton = NodePath("")
 
@@ -23,3 +23,6 @@ shape = SubResource("BoxShape3D_sdxyn")
 [node name="AnchorListe" type="Node3D" parent="."]
 
 [node name="AnteneListe" type="Node3D" parent="."]
+
+[connection signal="mouse_entered" from="ObjetListe/Obj" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ObjetListe/Obj" to="." method="_on_mouse_exited"]
