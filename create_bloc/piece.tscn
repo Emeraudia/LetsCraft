@@ -21,3 +21,5 @@ skeleton = NodePath("")
 shape = SubResource("BoxShape3D_sdxyn")
 
 [node name="AnchorListe" type="Node3D" parent="."]
+
+[node name="AnteneListe" type="Node3D" parent="."]
