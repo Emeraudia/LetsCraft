@@ -30,9 +30,9 @@ var mouseCurrentPos = Vector2(0,0)
 var listSelection = Array()
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	get_node("piece/Area3D").clicked.connect(select_piece)
+	get_node("Piece").clicked.connect(select_piece)
 	
-	get_node("piece2/Area3D").clicked.connect(select_piece)
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,11 +42,12 @@ func _process(_delta):
 	
 	#Creation d'une piece
 	if(creation != CreationMode.Off && Input.is_action_just_pressed("click_gauche")):
-		var scene = load("res://Pieces.tscn")
+		print("Piece créer")
+		var scene = load("res://create_bloc/piece.tscn")
 		var instance = scene.instantiate()
-		instance.get_child(0).setPos([-2,0,0])
+		instance.setPos([-2,0,0])
 		add_child(instance)
-		instance.get_child(0).clicked.connect(select_piece)
+		instance.clicked.connect(select_piece)
 
 	
 	
@@ -58,7 +59,7 @@ func _process(_delta):
 			mouseCurrentPos = get_viewport().get_mouse_position()
 			
 			if(Input.is_action_just_pressed("click_gauche")):
-				dragDist = $Camera3D.get_camera_transform().origin.distance_to(listSelection[-1].get_child(0).origin)
+				dragDist = $Camera3D.get_camera_transform().origin.distance_to(listSelection[-1].origin)
 				mouseOrigin = $Camera3D.project_position(
 					mouseCurrentPos, 
 					dragDist
@@ -70,7 +71,7 @@ func _process(_delta):
 			var camera_rotation = camera_transform.basis
 			var movement = (camera_rotation * mouseCurrentPosGlobal)
 			for i in listSelection:
-				i.get_child(0).setPos(movement)
+				i.setPos(movement)
 			mouseOrigin = $Camera3D.project_position(
 				mouseCurrentPos, 
 				dragDist
@@ -102,19 +103,19 @@ func selection_mode():
 func select_piece(node):
 	if(mode == SelectionMode.On):
 		if(listSelection.find(node) == -1):
-			node.get_child(0).change_color(Color(1, 1, 0, 1.0))
+			node.change_color(Color(1, 1, 0, 1.0))
 			listSelection.append(node)
 		else:
 			deselect_piece(node)	
 
 func deselect_piece(node):
 	listSelection.remove_at(listSelection.find(node))
-	node.get_child(0).change_color(Color(0.42, 0.69, 0.13, 1.0))
+	node.change_color(Color(0.42, 0.69, 0.13, 1.0))
 			
 #deselectionne toutes les pieces
 func unselectAll():
 	for i in listSelection:
-		i.get_child(0).change_color(Color(0.42, 0.69, 0.13, 1.0))
+		i.change_color(Color(0.42, 0.69, 0.13, 1.0))
 	listSelection.clear()
 
 func reset_mode():
