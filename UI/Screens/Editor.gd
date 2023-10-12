@@ -1,6 +1,10 @@
 extends Control
 
-signal optionButton
+signal mode
 
-func _on_option_button_item_selected(index):
-	optionButton.emit(index)
+func _on_select_button_pressed():
+	mode.emit("select")
+
+
+func _on_move_button_pressed():
+	mode.emit("move")

@@ -37,7 +37,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	# selection_mode()
+	selection_mode()
 	
 	
 	#Creation d'une piece
@@ -121,3 +121,15 @@ func reset_mode():
 	mode = SelectionMode.Off
 	translate = TranslationMode.Off
 	creation = CreationMode.Off
+	
+
+
+
+func _on_editor_mode(x):
+	if x=="move" :
+		reset_mode()
+		translate = TranslationMode.Plan
+	
+	if x=="select" :
+		reset_mode()
+		mode = SelectionMode.On

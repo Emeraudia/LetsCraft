@@ -22,6 +22,10 @@ window/stretch/aspect="expand"
 window/handheld/orientation=6
 window/vsync/vsync_mode=2
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/fontawesome/plugin.cfg")
+
 [input]
 
 click_gauche={
