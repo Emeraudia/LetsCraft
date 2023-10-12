@@ -83,18 +83,12 @@ func _process(_delta):
 
 #selection de la methode de selection des pieces
 func selection_mode():
-	if (Input.is_action_pressed("B")):
+	if (Input.is_action_pressed("selection")): # key b selection mode
 		reset_mode()
 		mode = SelectionMode.On
-	elif (Input.is_action_pressed("N")):
-		reset_mode()
-		mode = SelectionMode.Off
-	elif(Input.is_action_pressed("Plan")):
+	elif(Input.is_action_pressed("mouvement")): # key o pour activer le mouvement des pieces 
 		reset_mode()
 		translate = TranslationMode.Plan
-	elif(Input.is_action_pressed("Profondeur")):
-		reset_mode()
-		translate = TranslationMode.Profondeur
 	elif(Input.is_action_pressed("Create")): #key c and left click to create a piece
 		reset_mode()
 		creation = CreationMode.On
