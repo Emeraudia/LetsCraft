@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://djpjshiuyrr4e"]
-[ext_resource type="Script" path="res://Main.gd" id="1_ltjda"]
-[ext_resource type="PackedScene" uid="uid://6ou4f1qwuioe" path="res://UI/Screens/Editor.tscn" id="3_fe407"]
+[gd_scene load_steps=4 format=3 uid="uid://dvuin5kdtpvov"]
 
+[ext_resource type="Script" path="res://Main.gd" id="1_ltjda"]
 [ext_resource type="PackedScene" uid="uid://dii3q0cyuhhp0" path="res://create_bloc/piece.tscn" id="2_3jmad"]
+[ext_resource type="PackedScene" uid="uid://6ou4f1qwuioe" path="res://UI/Screens/Editor.tscn" id="3_fe407"]
 
 [node name="main" type="Node"]
 script = ExtResource("1_ltjda")
@@ -14,8 +14,8 @@ current = true
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.821289, 0.570513, 0, -0.570513, 0.821289, 0, 1.50353, 0.34135)
 
-
 [node name="Editor" parent="." instance=ExtResource("3_fe407")]
 
-[connection signal="mode" from="Editor" to="." method="_on_editor_mode"]
 [node name="Piece" parent="." instance=ExtResource("2_3jmad")]
+
+[connection signal="mode" from="Editor" to="." method="_on_editor_mode"]

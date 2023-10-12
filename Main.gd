@@ -134,3 +134,12 @@ func _on_editor_mode(x):
 	if x=="select" :
 		reset_mode()
 		mode = SelectionMode.On
+		
+	if x=="new" :
+		reset_mode()
+		creation = CreationMode.On
+		
+	if x=="edit" :
+		reset_mode()
+		Input.action_press("resize")
+

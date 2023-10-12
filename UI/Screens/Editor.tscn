@@ -93,12 +93,12 @@ script = ExtResource("3_brpmf")
 icon_size = 64
 icon_name = "arrows-up-down-left-right"
 
-[node name="CameraContainer" type="Control" parent="MarginContainer/HBoxContainer"]
+[node name="NewCubeContainer" type="Control" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="CameraIcon" type="Label" parent="MarginContainer/HBoxContainer/CameraContainer"]
+[node name="NewCubeIcon" type="Label" parent="MarginContainer/HBoxContainer/NewCubeContainer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -109,12 +109,55 @@ auto_translate = false
 localize_numeral_system = false
 theme_override_fonts/font = ExtResource("2_1ggqa")
 theme_override_font_sizes/font_size = 64
-text = ""
+text = ""
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("3_brpmf")
 icon_size = 64
-icon_name = "video"
+icon_name = "square-plus"
+
+[node name="NewCubeButton" type="Button" parent="MarginContainer/HBoxContainer/NewCubeContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="EditShapeContainer" type="Control" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="EditShapeIcon" type="Label" parent="MarginContainer/HBoxContainer/EditShapeContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+auto_translate = false
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("2_1ggqa")
+theme_override_font_sizes/font_size = 64
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_brpmf")
+icon_size = 64
+icon_name = "hammer"
+
+[node name="EditShapeButton" type="Button" parent="MarginContainer/HBoxContainer/EditShapeContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/SelectContainer/SelectButton" to="." method="_on_select_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/MoveContainer/MoveButton" to="." method="_on_move_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/NewCubeContainer/NewCubeButton" to="." method="_on_new_cube_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/EditShapeContainer/EditShapeButton" to="." method="_on_edit_shape_button_pressed"]
