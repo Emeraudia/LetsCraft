@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dii3q0cyuhhp0"]
+[gd_scene load_steps=6 format=3 uid="uid://dii3q0cyuhhp0"]
 
 [ext_resource type="Script" path="res://create_bloc/piece.gd" id="1_t8w5o"]
 
@@ -6,12 +6,17 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sdxyn"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_n4x7w"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_62onc"]
+
 [node name="Piece" type="Node3D"]
 script = ExtResource("1_t8w5o")
 
 [node name="ObjetListe" type="Node3D" parent="."]
 
 [node name="Obj" type="Area3D" parent="ObjetListe"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.46056, 0, 0)
 
 [node name="Mesh" type="MeshInstance3D" parent="ObjetListe/Obj"]
 mesh = SubResource("BoxMesh_61k4y")
@@ -20,9 +25,21 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ObjetListe/Obj"]
 shape = SubResource("BoxShape3D_sdxyn")
 
+[node name="Obj2" type="Area3D" parent="ObjetListe"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10652, 0, 0.0182344)
+
+[node name="Mesh" type="MeshInstance3D" parent="ObjetListe/Obj2"]
+mesh = SubResource("BoxMesh_n4x7w")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ObjetListe/Obj2"]
+shape = SubResource("BoxShape3D_62onc")
+
 [node name="AnchorListe" type="Node3D" parent="."]
 
 [node name="AnteneListe" type="Node3D" parent="."]
 
 [connection signal="mouse_entered" from="ObjetListe/Obj" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ObjetListe/Obj" to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ObjetListe/Obj2" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ObjetListe/Obj2" to="." method="_on_mouse_exited"]
