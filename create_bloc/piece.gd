@@ -4,10 +4,12 @@ signal clicked(node) #signal emit when you click on the object
 var enter = false
 var origin = position
 var newMaterial = StandardMaterial3D.new()
+var newMesh = BoxMesh.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	newMaterial.albedo_color = Color(0.42, 0.69, 0.13, 1.0)
+	$ObjetListe/Obj/Mesh.mesh = newMesh
 	for obj in $ObjetListe.get_children() :
 		obj.get_child(0).material_override = newMaterial
 

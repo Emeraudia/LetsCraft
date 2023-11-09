@@ -18,3 +18,5 @@ shape = SubResource("BoxShape3D_18i58")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_wfuok")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
