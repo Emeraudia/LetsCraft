@@ -6,6 +6,9 @@ var origin = position
 var newMaterial = StandardMaterial3D.new()
 var newMesh = BoxMesh.new()
 
+# [pieces contraintes,..]
+var contrainte_list = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	newMaterial.albedo_color = Color(0.42, 0.69, 0.13, 1.0)
@@ -18,8 +21,8 @@ func _ready():
 func _process(delta):
 	if(Input.is_action_just_pressed("anchor")):
 		var sp = get_pos_size()
-		anchor_modif(sp[0],sp[1])
-		antene_modif(sp[0],sp[1])
+		anchor_modif(sp[1],sp[0])
+		antene_modif(sp[1],sp[0])
 	if(Input.is_action_just_pressed("resize")):
 		resize()
 		
@@ -41,16 +44,28 @@ func anchor_modif(piece_size,pos):
 			var child = anchor.instantiate()
 			child.position = Vector3(pos.x+i*x/2,pos.y,pos.z+j*z/2)
 			child.change_scale(Vector3(0,y*0.95,0))
+			child.set_collision_layer_value(1,false)
+			child.set_collision_mask_value(1,false)
+			child.set_collision_layer_value(2,true)
+			child.set_collision_mask_value(2,true)
 			$AnchorListe.add_child(child)
 			#4 arrete axe vertical
 			child = anchor.instantiate()
 			child.position = Vector3(pos.x+i*x/2,pos.y+j*y/2,pos.z)
 			child.change_scale(Vector3(0,0,z*0.95))
+			child.set_collision_layer_value(1,false)
+			child.set_collision_mask_value(1,false)
+			child.set_collision_layer_value(2,true)
+			child.set_collision_mask_value(2,true)
 			$AnchorListe.add_child(child)
 			#4 arrete axe circulaire
 			child = anchor.instantiate()
 			child.position = Vector3(pos.x,pos.y+i*y/2,pos.z+j*z/2)
 			child.change_scale(Vector3(x*0.95,0,0))
+			child.set_collision_layer_value(1,false)
+			child.set_collision_mask_value(1,false)
+			child.set_collision_layer_value(2,true)
+			child.set_collision_mask_value(2,true)
 			$AnchorListe.add_child(child)
 
 	
@@ -70,16 +85,28 @@ func antene_modif(piece_size,pos):
 		var child = antene.instantiate()
 		child.position = Vector3(pos.x+i*(x/2+size/2)+0.01,pos.y+0,pos.z+0)
 		child.change_scale(Vector3(size,0,0))
+		child.contrainte_dim = 0
+		child.contrainte_way = i
+		child.set_collision_layer_value(1,false)
+		child.set_collision_layer_value(2,true)
 		$AnchorListe.add_child(child)
 		
 		child = antene.instantiate()
 		child.position = Vector3(pos.x+0,pos.y+i*(y/2+size/2)+0.01,pos.z+0)
 		child.change_scale(Vector3(0,size,0))
+		child.contrainte_dim = 1
+		child.contrainte_way = i
+		child.set_collision_layer_value(1,false)
+		child.set_collision_layer_value(2,true)
 		$AnchorListe.add_child(child)
 		
 		child = antene.instantiate()
 		child.position = Vector3(pos.x+0,pos.y+0,pos.z+i*(z/2+size/2)+0.01)
 		child.change_scale(Vector3(0,0,size))
+		child.contrainte_dim = 2
+		child.contrainte_way = i
+		child.set_collision_layer_value(1,false)
+		child.set_collision_layer_value(2,true)
 		$AnchorListe.add_child(child)
 	
 func resize():
@@ -91,11 +118,10 @@ func resize():
 		obj.get_child(1).get_shape().set_size(size)
 		
 	var val = get_pos_size()
-	size = val[0]
-	pos = val[1]
+	pos = val[0]
+	size = val[1]
 	anchor_modif(size,pos)
 	antene_modif(size,pos)
-	
 	
 func get_pos_size():
 	var min = Vector3(0,0,0)
@@ -116,10 +142,8 @@ func get_pos_size():
 	size = Vector3(max.x-min.x,max.y-min.y,max.z-min.z)
 	var pos = Vector3((min.x+max.x)/2,(min.y+max.y)/2,(min.z+max.z)/2)
 	
-	return [size,pos]
+	return [pos,size]
 
-func get_size():
-	pass
 	
 func _on_mouse_entered():
 	enter = true
@@ -137,14 +161,19 @@ func change_color(c):
 		mesh.get_child(0).material_override = newMaterial
 	
 #relocalise la piece a la positon p
-func setPos(p):
+func setPos(p,mouvementcontraint = false):
 	position.x = position.x+p[0]
 	position.y = position.y+p[1]
 	position.z = position.z+p[2]
+	
+	if(!mouvementcontraint):
+		for contr in contrainte_list:
+			contr.setPos(p,true)
 	
 	
 func getPosPlan():
 	return [position.x,position.y]
 	
 
-
+func addContrainte(area,dim,way):
+	contrainte_list.append(area)

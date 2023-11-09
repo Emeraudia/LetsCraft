@@ -1,9 +1,12 @@
 extends Area3D
 var s = Vector3(0.03,0.03,0.03)
 
-
 var newMaterial = StandardMaterial3D.new()
 var newMesh = BoxMesh.new()
+
+var contrainte_dim
+var contrainte_way = 1
+var disable = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,5 +37,12 @@ func change_scale(vScale) :
 
 
 func _on_area_entered(area):
-	if(get_parent().get_parent() != area.get_parent().get_parent()):
+	if(!disable and get_parent().get_parent() != area.get_parent().get_parent()):
 		print("OwO")
+		disable = true
+		get_parent().get_parent().addContrainte(area.get_parent().get_parent(),contrainte_dim,contrainte_way)
+
+
+func _on_area_exited(area):
+	if(get_parent().get_parent() != area.get_parent().get_parent()):
+		print("UwU")
