@@ -1,0 +1,163 @@
+[gd_scene load_steps=4 format=3 uid="uid://6ou4f1qwuioe"]
+
+[ext_resource type="Script" path="res://UI/Screens/Editor.gd" id="1_kgirg"]
+[ext_resource type="FontFile" uid="uid://k44rcsfreskj" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_1ggqa"]
+[ext_resource type="Script" path="res://addons/fontawesome/FontAwesome.gd" id="3_brpmf"]
+
+[node name="Editor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kgirg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.884
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.167969
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+layout_mode = 2
+color = Color(0.0784314, 0.0784314, 0.0784314, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SelectContainer" type="Control" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SelectButton" type="Button" parent="MarginContainer/HBoxContainer/SelectContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="SelectIcon" type="Label" parent="MarginContainer/HBoxContainer/SelectContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+auto_translate = false
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("2_1ggqa")
+theme_override_font_sizes/font_size = 64
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_brpmf")
+icon_size = 64
+icon_name = "arrow-pointer"
+
+[node name="MoveContainer" type="Control" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoveButton" type="Button" parent="MarginContainer/HBoxContainer/MoveContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="MoveIcon" type="Label" parent="MarginContainer/HBoxContainer/MoveContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+auto_translate = false
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("2_1ggqa")
+theme_override_font_sizes/font_size = 64
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_brpmf")
+icon_size = 64
+icon_name = "arrows-up-down-left-right"
+
+[node name="NewCubeContainer" type="Control" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NewCubeIcon" type="Label" parent="MarginContainer/HBoxContainer/NewCubeContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+auto_translate = false
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("2_1ggqa")
+theme_override_font_sizes/font_size = 64
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_brpmf")
+icon_size = 64
+icon_name = "square-plus"
+
+[node name="NewCubeButton" type="Button" parent="MarginContainer/HBoxContainer/NewCubeContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="EditShapeContainer" type="Control" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="EditShapeIcon" type="Label" parent="MarginContainer/HBoxContainer/EditShapeContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+auto_translate = false
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("2_1ggqa")
+theme_override_font_sizes/font_size = 64
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_brpmf")
+icon_size = 64
+icon_name = "hammer"
+
+[node name="EditShapeButton" type="Button" parent="MarginContainer/HBoxContainer/EditShapeContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/SelectContainer/SelectButton" to="." method="_on_select_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/MoveContainer/MoveButton" to="." method="_on_move_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/NewCubeContainer/NewCubeButton" to="." method="_on_new_cube_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/EditShapeContainer/EditShapeButton" to="." method="_on_edit_shape_button_pressed"]

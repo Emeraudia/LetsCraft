@@ -13,6 +13,7 @@ enum TranslationMode {
 	Plan,
 	Profondeur,
 }
+
 enum CreationMode {
 	Off,
 	On,
@@ -54,9 +55,7 @@ func _process(_delta):
 	if(!listSelection.is_empty() && Input.is_action_pressed("click_gauche") && translate != TranslationMode.Off):
 		
 		if(translate == TranslationMode.Plan):
-			
-			
-			
+		
 			mouseCurrentPos = get_viewport().get_mouse_position()
 			
 			if(Input.is_action_just_pressed("click_gauche")):
@@ -117,3 +116,24 @@ func reset_mode():
 	mode = SelectionMode.Off
 	translate = TranslationMode.Off
 	creation = CreationMode.Off
+	
+
+
+
+func _on_editor_mode(x):
+	if x=="move" :
+		reset_mode()
+		translate = TranslationMode.Plan
+	
+	if x=="select" :
+		reset_mode()
+		mode = SelectionMode.On
+		
+	if x=="new" :
+		reset_mode()
+		creation = CreationMode.On
+		
+	if x=="edit" :
+		reset_mode()
+		Input.action_press("resize")
+
