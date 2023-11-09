@@ -21,10 +21,8 @@ skeleton = NodePath("")
 shape = SubResource("BoxShape3D_sdxyn")
 
 [node name="AnchorListe" type="Node3D" parent="."]
-visible = false
 
 [node name="AnteneListe" type="Node3D" parent="."]
-visible = false
 
 [connection signal="mouse_entered" from="ObjetListe/Obj" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ObjetListe/Obj" to="." method="_on_mouse_exited"]
