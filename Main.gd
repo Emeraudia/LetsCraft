@@ -105,8 +105,10 @@ func select_piece(node):
 	if(mode == SelectionMode.On):
 		if(listSelection.find(node) == -1):
 			node.change_color(Color(1, 1, 0, 1.0))
+			node.absorbChild()
 			listSelection.append(node)
 		else:
+			node.absorbChild(false)
 			deselect_piece(node)	
 
 func deselect_piece(node):

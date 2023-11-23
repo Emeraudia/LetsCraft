@@ -8,6 +8,12 @@ var newMesh = BoxMesh.new()
 
 # [pieces contraintes,..]
 var contrainte_list = []
+var canAbsorb = false
+
+enum CONTRAINTE_POSITION {bottom,left,up,right}
+var cr_p = CONTRAINTE_POSITION.bottom
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,13 +27,14 @@ func _ready():
 func _process(delta):
 	if(Input.is_action_just_pressed("anchor")):
 		var sp = get_pos_size()
-		anchor_modif(sp[1],sp[0])
+		#anchor_modif(sp[1],sp[0])
 		antene_modif(sp[1],sp[0])
 	if(Input.is_action_just_pressed("resize")):
 		resize()
 		
 	if(enter && Input.is_action_just_pressed("click_gauche")):
 		emit_signal("clicked",self)
+			
 		
 func anchor_modif(piece_size,pos):
 	for decay in $AnchorListe.get_children():
@@ -120,7 +127,7 @@ func resize():
 	var val = get_pos_size()
 	pos = val[0]
 	size = val[1]
-	anchor_modif(size,pos)
+	#anchor_modif(size,pos)
 	antene_modif(size,pos)
 	
 func get_pos_size():
@@ -161,14 +168,15 @@ func change_color(c):
 		mesh.get_child(0).material_override = newMaterial
 	
 #relocalise la piece a la positon p
-func setPos(p,mouvementcontraint = false):
+func setPos(p,listeContrainteBouger = []):
 	position.x = position.x+p[0]
 	position.y = position.y+p[1]
 	position.z = position.z+p[2]
 	
-	if(!mouvementcontraint):
-		for contr in contrainte_list:
-			contr.setPos(p,true)
+	listeContrainteBouger.append(self)
+	for cr in contrainte_list:
+		if cr not in listeContrainteBouger:
+			cr.setPos(p,listeContrainteBouger)
 	
 	
 func getPosPlan():
@@ -176,4 +184,33 @@ func getPosPlan():
 	
 
 func addContrainte(area,dim,way):
-	contrainte_list.append(area)
+	print(self," : ",canAbsorb)
+	if(!contrainte_list.has(area)):
+		if(canAbsorb):
+			#écarte entre les 2 pieces
+			var p = Vector3()
+			var dist = sqrt(pow(area.position[dim]-position[dim],2))
+			var x = dist - (area.get_pos_size()[1][dim] + get_pos_size()[1][dim])/2
+			p[dim] = way*(x)
+			#centrage des piece selon les autres dimension
+			var other_dim = [0,1,2]
+			other_dim.erase(dim)
+			for dim_iter in other_dim:
+				p[dim_iter] = area.position[dim_iter]-position[dim_iter]
+			setPos(p)
+			area.absorbChild(true,[self])
+		contrainte_list.append(area)
+		print(contrainte_list)
+
+func removeContrainte(area):
+	area.canAbsorb = false
+	contrainte_list.erase(area)
+	print(contrainte_list)
+	
+
+func absorbChild(value = true, listAbsorb = []):
+	if self not in listAbsorb:
+		canAbsorb = value
+		listAbsorb.append(self)
+		for cr in contrainte_list:
+			cr.absorbChild(value,listAbsorb)

@@ -38,11 +38,11 @@ func change_scale(vScale) :
 
 func _on_area_entered(area):
 	if(!disable and get_parent().get_parent() != area.get_parent().get_parent()):
-		print("OwO")
 		disable = true
 		get_parent().get_parent().addContrainte(area.get_parent().get_parent(),contrainte_dim,contrainte_way)
 
 
 func _on_area_exited(area):
 	if(get_parent().get_parent() != area.get_parent().get_parent()):
-		print("UwU")
+		disable = false
+		get_parent().get_parent().removeContrainte(area.get_parent().get_parent())
