@@ -1,0 +1,83 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqtu61jmat1t5"]
+
+[ext_resource type="PackedScene" uid="uid://dws1mi11315d6" path="res://UI/Components/Card.tscn" id="1_4flik"]
+
+[node name="ChooseElement" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.223529, 0.223529, 0.223529, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HFlowContainer" type="HFlowContainer" parent="ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+
+[node name="Card" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
+layout_mode = 2
+title = "Mon projet"
+
+[node name="Card2" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
+layout_mode = 2
+title = "Mon autre projet"
+
+[node name="Card3" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
+layout_mode = 2
+title = "Mon projet"
+
+[node name="Card4" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
+layout_mode = 2
+title = "Mon autre projet"
+
+[node name="Card5" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
+layout_mode = 2
+title = "Mon projet"
+
+[node name="Card6" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
+layout_mode = 2
+title = "Mon autre projet"
+
+[node name="Card7" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
+layout_mode = 2
+title = "Mon projet"
+
+[node name="Card8" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
+layout_mode = 2
+title = "Mon autre projet"
+
+[node name="Card9" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
+layout_mode = 2
+title = "Mon projet"
+
+[node name="Card10" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
+layout_mode = 2
+title = "Mon autre projet"
