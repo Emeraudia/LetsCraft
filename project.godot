@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 <<<<<<<HEADrun/main_scene="res://test.tscn"
 
+[autoload]
+
+State="*res://state/State.gd"
+
 [display]
 
 window/stretch/mode="canvas_items"
