@@ -26,7 +26,7 @@ func anchor_modif(piece_size):
 	for decay in $AnchorListe.get_children():
 		decay.queue_free()
 	
-	var anchor = load("res://create_bloc/anchor.tscn")
+	var anchor = load("res://gestion_piece/create_bloc/anchor.tscn")
 	var x = piece_size.x
 	var y = piece_size.y
 	var z = piece_size.z
@@ -54,7 +54,7 @@ func antene_modif(piece_size):
 	for decay in $AnteneListe.get_children():
 		decay.queue_free()
 	
-	var antene = load("res://create_bloc/anchor.tscn")
+	var antene = load("res://gestion_piece/create_bloc/anchor.tscn")
 	var x = piece_size.x
 	var y = piece_size.y
 	var z = piece_size.z
@@ -107,7 +107,7 @@ func setPos(p):
 	
 	
 func getPosPlan():
-	return [position.x,position.y]
+	return [position.x,position.y,position.z]
 	
 
 

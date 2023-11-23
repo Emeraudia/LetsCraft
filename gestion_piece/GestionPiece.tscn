@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3hjsp2sql080"]
+
+[ext_resource type="Script" path="res://gestion_piece/GestionPiece.gd" id="1_swju1"]
+
+[node name="GestionPiece" type="Node3D"]
+script = ExtResource("1_swju1")
