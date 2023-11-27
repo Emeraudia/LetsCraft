@@ -9,9 +9,13 @@ var newMesh = BoxMesh.new()
 # [pieces contraintes,..]
 var contrainte_list = []
 var canAbsorb = false
+var select = false
 
 enum CONTRAINTE_POSITION {bottom,left,up,right}
 var cr_p = CONTRAINTE_POSITION.bottom
+
+enum View {ABSORB,SELECT}
+var currentView = View.SELECT
 
 
 
@@ -34,7 +38,17 @@ func _process(delta):
 		
 	if(enter && Input.is_action_just_pressed("click_gauche")):
 		emit_signal("clicked",self)
-			
+		
+	match(currentView):
+		View.ABSORB:
+			if(Input.is_action_just_pressed("change_view")):
+				currentView = View.SELECT
+			_seeAbsorb()
+		View.SELECT:
+			if(Input.is_action_just_pressed("change_view")):
+				currentView = View.ABSORB
+			_seeSelect()
+	
 		
 func anchor_modif(piece_size,pos):
 	for decay in $AnchorListe.get_children():
@@ -203,14 +217,35 @@ func addContrainte(area,dim,way):
 		print(contrainte_list)
 
 func removeContrainte(area):
-	area.canAbsorb = false
 	contrainte_list.erase(area)
 	print(contrainte_list)
 	
+func removeAllContrainte():
+	for cr in contrainte_list:
+		cr.removeContrainte(self)
+		cr.canAbsorb = false
+		removeContrainte(cr)
 
 func absorbChild(value = true, listAbsorb = []):
-	if self not in listAbsorb:
-		canAbsorb = value
-		listAbsorb.append(self)
+	if self not in listAbsorb and not select:
+			canAbsorb = value
+			listAbsorb.append(self)
+			for cr in contrainte_list:
+				cr.absorbChild(value,listAbsorb)
+	elif select and not (value == canAbsorb):
+		canAbsorb = true
 		for cr in contrainte_list:
-			cr.absorbChild(value,listAbsorb)
+			cr.absorbChild(true,[self])
+
+
+func _seeAbsorb():
+	if canAbsorb:
+		change_color(Color(255,0,0))
+	else:
+		change_color(Color(0,0,255))
+		
+func _seeSelect():
+	if select :
+		change_color(Color(1,1,0))
+	else:
+		change_color(Color(0.42, 0.69, 0.13))

@@ -99,16 +99,21 @@ func selection_mode():
 	elif(Input.is_action_pressed("Create")): #key c and left click to create a piece
 		reset_mode()
 		creation = CreationMode.On
+	elif(Input.is_action_pressed("BreakContrainte")):
+		for s in listSelection:
+			s.removeAllContrainte()
 
 #recupere la derniere piece cliquer et l'ajoute a la liste de selection en fonction du mode
 func select_piece(node):
 	if(mode == SelectionMode.On):
 		if(listSelection.find(node) == -1):
-			node.change_color(Color(1, 1, 0, 1.0))
 			node.absorbChild()
+			node.select = true
 			listSelection.append(node)
 		else:
+			node.select = false
 			node.absorbChild(false)
+			
 			deselect_piece(node)	
 
 func deselect_piece(node):
