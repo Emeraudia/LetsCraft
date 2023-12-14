@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqtu61jmat1t5"]
+
+[ext_resource type="Script" path="res://UI/Screens/ChooseElement.gd" id="1_3fwfg"]
+[ext_resource type="PackedScene" uid="uid://dws1mi11315d6" path="res://UI/Components/Card.tscn" id="1_4flik"]
+
+[node name="ChooseElement" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3fwfg")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.223529, 0.223529, 0.223529, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HFlowContainer" type="HFlowContainer" parent="ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+alignment = 1
+
+[node name="Cube" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
+layout_mode = 2
+title = "Cube"
+
+[node name="Box" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
+layout_mode = 2
+title = "Boite"
