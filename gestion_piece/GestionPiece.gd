@@ -68,12 +68,10 @@ func move_pieces():
 	
 	var mouseCurrentPosGlobal = node_camera.project_position(mouseCurrentPos,dragDist) - mouseOrigin
 	var camera_transform = node_camera.get_camera_transform()
-	var camera_rotation = camera_transform.basis
-	var movement = (camera_rotation * mouseCurrentPosGlobal)
 	
 	#on fait bouger toutes les pieces de la selection
 	for i in listSelection:
-		i.setPos(movement)
+		i.setPos(mouseCurrentPosGlobal)
 	
 	mouseOrigin = node_camera.project_position(mouseCurrentPos, dragDist)
 
