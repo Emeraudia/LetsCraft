@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqtu61jmat1t5"]
+[gd_scene load_steps=3 format=3 uid="uid://cqtu61jmat1t5"]
 
+[ext_resource type="Script" path="res://UI/Screens/ChooseElement.gd" id="1_3fwfg"]
 [ext_resource type="PackedScene" uid="uid://dws1mi11315d6" path="res://UI/Components/Card.tscn" id="1_4flik"]
 
 [node name="ChooseElement" type="Control"]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_3fwfg")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -41,43 +43,12 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
+alignment = 1
 
-[node name="Card" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
+[node name="Cube" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
 layout_mode = 2
-title = "Mon projet"
+title = "Cube"
 
-[node name="Card2" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
+[node name="Box" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
 layout_mode = 2
-title = "Mon autre projet"
-
-[node name="Card3" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
-layout_mode = 2
-title = "Mon projet"
-
-[node name="Card4" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
-layout_mode = 2
-title = "Mon autre projet"
-
-[node name="Card5" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
-layout_mode = 2
-title = "Mon projet"
-
-[node name="Card6" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
-layout_mode = 2
-title = "Mon autre projet"
-
-[node name="Card7" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
-layout_mode = 2
-title = "Mon projet"
-
-[node name="Card8" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
-layout_mode = 2
-title = "Mon autre projet"
-
-[node name="Card9" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
-layout_mode = 2
-title = "Mon projet"
-
-[node name="Card10" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
-layout_mode = 2
-title = "Mon autre projet"
+title = "Boite"

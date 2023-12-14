@@ -1,4 +1,9 @@
 extends PanelContainer
+class_name Card
+
+signal cardEvent
+
+enum Event { PRESSED }
 
 @export var title : String
 
@@ -18,3 +23,8 @@ func _on_mouse_entered():
 func _on_mouse_exited():
 	$SubViewportContainer/SubViewport/Model.doRotate = false
 	$SubViewportContainer/SubViewport.render_target_update_mode = 0
+
+
+func _on_gui_input(event):
+	if event.is_pressed():
+		cardEvent.emit(Event.PRESSED, title)
