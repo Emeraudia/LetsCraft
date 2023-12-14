@@ -13,7 +13,7 @@ func _ready():
 	set_editor_mode(EditorMode.Selection)
 
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 func set_editor_mode(mode:EditorMode):

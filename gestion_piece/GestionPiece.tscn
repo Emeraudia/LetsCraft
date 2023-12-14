@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3hjsp2sql080"]
+[gd_scene load_steps=3 format=3 uid="uid://d3hjsp2sql080"]
 
 [ext_resource type="Script" path="res://gestion_piece/GestionPiece.gd" id="1_swju1"]
+[ext_resource type="PackedScene" uid="uid://cegvubptsgcbw" path="res://gestion_piece/create_bloc/piece.tscn" id="2_ao8ul"]
 
 [node name="GestionPiece" type="Node3D"]
 script = ExtResource("1_swju1")
+
+[node name="PieceListe" type="Node3D" parent="."]
+
+[node name="Piece" parent="PieceListe" instance=ExtResource("2_ao8ul")]
