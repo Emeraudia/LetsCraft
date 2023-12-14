@@ -7,6 +7,8 @@ enum EditorMode {
 	Camera
 }
 
+enum View {ABSORB,SELECT}
+
 var editorMode:EditorMode
 
 func _ready():

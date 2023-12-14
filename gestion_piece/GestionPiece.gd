@@ -8,6 +8,8 @@ var mouseCurrentPos = Vector2(0,0)
 var listSelection = Array()
 var node_camera
 
+var Piece_VIEW = State.View.SELECT
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node("PieceListe/Piece").clicked.connect(select_piece)
@@ -35,6 +37,19 @@ func _process(_delta):
 		&& State.get_editor_mode() == State.EditorMode.Translation):
 			
 		move_pieces()
+	
+	#Suppresion des contraintes 
+	#les antennes sont insensibles jusqu'as ce qu'elle sorte d'une piece
+	if(Input.is_action_pressed("BreakContrainte")):
+		for s in listSelection:
+			s.removeAllContrainte()
+	match(Piece_VIEW):
+		State.View.ABSORB:
+			if(Input.is_action_just_pressed("change_view")):
+				Piece_VIEW = State.View.SELECT
+		State.View.SELECT:
+			if(Input.is_action_just_pressed("change_view")):
+				Piece_VIEW = State.View.ABSORB
 
 
 

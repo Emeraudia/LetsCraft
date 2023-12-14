@@ -37,11 +37,11 @@ func _process(_delta):
 	if(enter && Input.is_action_just_pressed("click_gauche")):
 		emit_signal("clicked",self)
 		
-	var parent = get_parent()
+	var parent = get_parent().get_parent()
 	match(parent.Piece_VIEW):
-		parent.View.ABSORB:
+		State.View.ABSORB:
 			_seeAbsorb()
-		parent.View.SELECT:
+		State.View.SELECT:
 			_seeSelect()
 	
 		
