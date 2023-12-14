@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://cegvubptsgcbw"]
 
-[ext_resource type="Script" path="res://gestion_piece/create_bloc/piece.gd" id="1_57sgn"]
+[ext_resource type="Script" path="res://gestion_piece/create_bloc/piece.gd" id="1_ihh01"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_61k4y"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sdxyn"]
 
 [node name="Piece" type="Node3D"]
-script = ExtResource("1_57sgn")
+script = ExtResource("1_ihh01")
 
 [node name="ObjetListe" type="Node3D" parent="."]
 
