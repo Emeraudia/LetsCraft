@@ -218,7 +218,7 @@ func removeContrainte(area):
 func removeAllContrainte():
 	for cr in contrainte_list:
 		cr.removeContrainte(self)
-		cr.canAbsorb = false
+		cr.absorbChild(false,[self])
 		removeContrainte(cr)
 
 func absorbChild(value = true, listAbsorb = []):
