@@ -43,12 +43,11 @@ func _process(_delta):
 	if(Input.is_action_pressed("BreakContrainte")):
 		for s in listSelection:
 			s.removeAllContrainte()
-	match(Piece_VIEW):
-		State.View.ABSORB:
-			if(Input.is_action_just_pressed("change_view")):
+	if(Input.is_action_just_pressed("change_view")):
+		match(Piece_VIEW):
+			State.View.ABSORB:
 				Piece_VIEW = State.View.SELECT
-		State.View.SELECT:
-			if(Input.is_action_just_pressed("change_view")):
+			State.View.SELECT:
 				Piece_VIEW = State.View.ABSORB
 
 
@@ -82,13 +81,10 @@ func move_pieces():
 		mouseOrigin = node_camera.project_position(mouseCurrentPos, dragDist)
 	
 	var mouseCurrentPosGlobal = node_camera.project_position(mouseCurrentPos,dragDist) - mouseOrigin
-	var camera_transform = node_camera.get_camera_transform()
-	var camera_rotation = camera_transform.basis
-	var movement = (camera_rotation * mouseCurrentPosGlobal)
 	
 	#on fait bouger toutes les pieces de la selection
 	for i in listSelection:
-		i.setPos(movement)
+		i.setPos(mouseCurrentPosGlobal)
 	
 	mouseOrigin = node_camera.project_position(mouseCurrentPos, dragDist)
 
@@ -98,14 +94,16 @@ func move_pieces():
 func select_piece(node):
 	if(State.get_editor_mode() == State.EditorMode.Selection):
 		if(listSelection.find(node) == -1):
-			node.change_color(Color(1, 1, 0, 1.0))
+			node.absorbChild()
+			node.select = true
 			listSelection.append(node)
 		else:
+			node.select = false
+			node.absorbChild(false)
 			deselect_piece(node)	
 
 func deselect_piece(node):
 	listSelection.remove_at(listSelection.find(node))
-	node.change_color(Color(0.42, 0.69, 0.13, 1.0))
 			
 #deselectionne toutes les pieces
 func unselectAll():
@@ -117,5 +115,7 @@ func unselectAll():
 func delete_pieces():
 	
 	for i in listSelection.size():
-		listSelection.pop_front().queue_free()
+		var node = listSelection.pop_front()
+		node.removeAllContrainte()
+		node.queue_free()
 

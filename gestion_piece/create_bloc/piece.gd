@@ -193,7 +193,6 @@ func getPosPlan():
 	
 
 func addContrainte(area,dim,way):
-	print(self," : ",canAbsorb)
 	if(!contrainte_list.has(area)):
 		if(canAbsorb):
 			#écarte entre les 2 pieces
@@ -209,17 +208,16 @@ func addContrainte(area,dim,way):
 			setPos(p)
 			area.absorbChild(true,[self])
 		contrainte_list.append(area)
-		print(contrainte_list)
 
 func removeContrainte(area):
 	contrainte_list.erase(area)
-	print(contrainte_list)
 	
 func removeAllContrainte():
 	for cr in contrainte_list:
 		cr.removeContrainte(self)
 		cr.absorbChild(false,[self])
-		removeContrainte(cr)
+	while contrainte_list.size() > 0:
+		contrainte_list.pop_back()
 
 func absorbChild(value = true, listAbsorb = []):
 	if self not in listAbsorb and not select:
