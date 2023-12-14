@@ -38,11 +38,14 @@ func _process(_delta):
 		emit_signal("clicked",self)
 		
 	var parent = get_parent().get_parent()
-	match(parent.Piece_VIEW):
-		State.View.ABSORB:
-			_seeAbsorb()
-		State.View.SELECT:
-			_seeSelect()
+	if parent.name == "GestionPiece":
+		match(parent.Piece_VIEW):
+			State.View.ABSORB:
+				_seeAbsorb()
+			State.View.SELECT:
+				_seeSelect()
+	else:
+		_seeSelect()
 	
 		
 func anchor_modif(piece_size,pos):
