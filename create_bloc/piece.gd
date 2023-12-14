@@ -14,8 +14,6 @@ var select = false
 enum CONTRAINTE_POSITION {bottom,left,up,right}
 var cr_p = CONTRAINTE_POSITION.bottom
 
-enum View {ABSORB,SELECT}
-var currentView = View.SELECT
 
 
 
@@ -39,14 +37,11 @@ func _process(delta):
 	if(enter && Input.is_action_just_pressed("click_gauche")):
 		emit_signal("clicked",self)
 		
-	match(currentView):
-		View.ABSORB:
-			if(Input.is_action_just_pressed("change_view")):
-				currentView = View.SELECT
+	var parent = get_parent()
+	match(parent.Piece_VIEW):
+		parent.View.ABSORB:
 			_seeAbsorb()
-		View.SELECT:
-			if(Input.is_action_just_pressed("change_view")):
-				currentView = View.ABSORB
+		parent.View.SELECT:
 			_seeSelect()
 	
 		

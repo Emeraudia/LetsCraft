@@ -18,9 +18,12 @@ enum CreationMode {
 	On,
 }
 
+enum View {ABSORB,SELECT}
+
 var mode = SelectionMode.On
 var translate = TranslationMode.Off
 var creation = CreationMode.Off
+var Piece_VIEW = View.SELECT
 var pieceNb = 1
 var dragDist = 0
 var mouseOrigin = Vector3(0,0,0)
@@ -102,6 +105,13 @@ func selection_mode():
 	elif(Input.is_action_pressed("BreakContrainte")):
 		for s in listSelection:
 			s.removeAllContrainte()
+	match(Piece_VIEW):
+		View.ABSORB:
+			if(Input.is_action_just_pressed("change_view")):
+				Piece_VIEW = View.SELECT
+		View.SELECT:
+			if(Input.is_action_just_pressed("change_view")):
+				Piece_VIEW = View.ABSORB
 
 #recupere la derniere piece cliquer et l'ajoute a la liste de selection en fonction du mode
 func select_piece(node):
