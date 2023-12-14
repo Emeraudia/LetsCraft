@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://dws1mi11315d6"]
 
 [ext_resource type="Script" path="res://UI/Components/Card.gd" id="1_iok5u"]
-[ext_resource type="PackedScene" uid="uid://dii3q0cyuhhp0" path="res://create_bloc/piece.tscn" id="2_n6pgg"]
-[ext_resource type="Script" path="res://create_bloc/anim.gd" id="3_q4ffx"]
+[ext_resource type="PackedScene" uid="uid://cegvubptsgcbw" path="res://gestion_piece/create_bloc/piece.tscn" id="2_n6pgg"]
+[ext_resource type="Script" path="res://gestion_piece/create_bloc/anim.gd" id="3_q4ffx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n5viv"]
 bg_color = Color(0.156863, 0.156863, 0.156863, 1)
