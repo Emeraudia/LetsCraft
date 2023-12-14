@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ciw6as6nfuhb3"]
+
+[ext_resource type="Shader" path="res://shaders/Grid.gdshader" id="1_2w1vd"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_2w1vd")
+shader_parameter/lineWidth = 0.02
