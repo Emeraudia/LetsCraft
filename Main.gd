@@ -23,6 +23,11 @@ func selection_mode():
 		State.set_editor_mode(State.EditorMode.Creation)
 	elif(Input.is_action_just_pressed("delete")): #key backspace pour supprimer la selection
 		$GestionPiece.delete_pieces()
+	elif(Input.is_action_just_pressed("save")): #key ctr+s save the piece's list
+		$GestionPiece.save_piece()
+	elif(Input.is_action_just_pressed("load")): #key ctr+l load the last save
+		$GestionPiece.load_piece()
+
 
 func _on_editor_mode(x):
 	if x=="move" :

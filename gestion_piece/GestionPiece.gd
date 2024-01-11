@@ -10,8 +10,6 @@ var node_camera
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	get_node("PieceListe/Piece").clicked.connect(select_piece)
-	
 	#recupere la camera du viewport actif (normalement y en a qu'un et il est dans le main pour l'instant)
 	node_camera = get_parent().get_viewport().get_camera_3d()
 
@@ -37,7 +35,6 @@ func _process(_delta):
 		move_pieces()
 
 
-
 #fonction de creation d'une piece
 #ne prend pas de parametre et ne renvoie rien
 #creer la piece a l'endroit clicke
@@ -54,6 +51,7 @@ func create_piece():
 	instance.setPos(mouseOrigin)
 	get_node("PieceListe").add_child(instance)
 	instance.clicked.connect(select_piece)
+	instance.add_to_group("Persist") #on l'ajoute au group persist afin de la sauvegarder
 
 #permet de bouger les pieces selectionnees
 #le mouvement est relative au premier clique de la souris
@@ -102,3 +100,83 @@ func delete_pieces():
 	for i in listSelection.size():
 		listSelection.pop_front().queue_free()
 
+# Note: This can be called from anywhere inside the tree. This function is
+# path independent.
+# Go through everything in the Persist group and ask them to return a
+# dict of relevant variables.
+# if no file name is provide, use the name "lastSave"
+
+func save_piece(name : String = "lastSave"):
+	
+	
+	#si le dossier save n'existe pas, on le creer
+	var dir = DirAccess.open("user://")
+	if (!dir.dir_exists("user://save")):
+		dir.make_dir("user://save")
+	
+
+	var save_piece = FileAccess.open("user://save/" + name + ".save", FileAccess.WRITE)
+	var save_nodes = get_tree().get_nodes_in_group("Persist")
+	for node in save_nodes:
+		# Check the node is an instanced scene so it can be instanced again during load.
+		if node.scene_file_path.is_empty():
+			print("persistent node '%s' is not an instanced scene, skipped" % node.name)
+			continue
+
+		# Check the node has a save function.
+		if !node.has_method("save"):
+			print("persistent node '%s' is missing a save() function, skipped" % node.name)
+			continue
+
+		# Call the node's save function.
+		var node_data = node.call("save")
+
+		# JSON provides a static method to serialized JSON string.
+		var json_string = JSON.stringify(node_data)
+
+		# Store the save dictionary as a new line in the save file.
+		save_piece.store_line(json_string)
+	
+	print("file saved")
+		
+# Note: This can be called from anywhere inside the tree. This function
+# is path independent.
+# if no file name is provide, use the name "lastSave"
+func load_piece(name : String = "lastSave"):
+	
+	
+	if not FileAccess.file_exists("user://save/" +name + ".save"):
+		return # Error! We don't have a save to load.
+
+	# Load the file line by line and process that dictionary to restore
+	# the object it represents.
+	var save_piece = FileAccess.open(("user://save/" +name + ".save"), FileAccess.READ)
+	while save_piece.get_position() < save_piece.get_length():
+		var json_string = save_piece.get_line()
+
+		# Creates the helper class to interact with JSON
+		var json = JSON.new()
+
+		# Check if there is any error while parsing the JSON string, skip in case of failure
+		var parse_result = json.parse(json_string)
+		if not parse_result == OK:
+			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			continue
+
+		# Get the data from the JSON object
+		var node_data = json.get_data()
+
+		# Firstly, we need to create the object and add it to the tree and set its position.
+		var new_object = load(node_data["filename"]).instantiate()
+		get_node(node_data["parent"]).add_child(new_object)
+		new_object.setPos(Vector3(node_data["pos_x"], node_data["pos_y"],node_data["pos_z"]))
+		new_object.clicked.connect(select_piece)
+		new_object.add_to_group("Persist")
+		
+	print("file loaded")
+	
+		# Now we set the remaining variables. Pas utilise pour les pieces pour le moment
+		#for i in node_data.keys():
+			#if i == "filename" or i == "parent" or i == "pos_x" or i == "pos_y":
+				#continue
+			#new_object.set(i, node_data[i])
