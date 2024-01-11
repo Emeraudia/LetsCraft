@@ -65,7 +65,6 @@ func move_pieces():
 		mouseOrigin = node_camera.project_position(mouseCurrentPos, dragDist)
 	
 	var mouseCurrentPosGlobal = node_camera.project_position(mouseCurrentPos,dragDist) - mouseOrigin
-	var camera_transform = node_camera.get_camera_transform()
 	
 	#on fait bouger toutes les pieces de la selection
 	for i in listSelection:
@@ -106,18 +105,12 @@ func delete_pieces():
 # dict of relevant variables.
 # if no file name is provide, use the name "lastSave"
 
-func save_piece(name : String = "lastSave"):
-	
-	
-	#si le dossier save n'existe pas, on le creer
-	var dir = DirAccess.open("user://")
-	if (!dir.dir_exists("user://save")):
-		dir.make_dir("user://save")
+func save_piece(saveName : String = "lastSave"):
 	
 
-	var save_piece = FileAccess.open("user://save/" + name + ".save", FileAccess.WRITE)
-	var save_nodes = get_tree().get_nodes_in_group("Persist")
-	for node in save_nodes:
+	var savePiece = FileAccess.open("user://save/" + saveName + ".save", FileAccess.WRITE)
+	var saveNodes = get_tree().get_nodes_in_group("Persist")
+	for node in saveNodes:
 		# Check the node is an instanced scene so it can be instanced again during load.
 		if node.scene_file_path.is_empty():
 			print("persistent node '%s' is not an instanced scene, skipped" % node.name)
@@ -135,24 +128,25 @@ func save_piece(name : String = "lastSave"):
 		var json_string = JSON.stringify(node_data)
 
 		# Store the save dictionary as a new line in the save file.
-		save_piece.store_line(json_string)
+		savePiece.store_line(json_string)
 	
-	print("file saved")
+	print("file saved : " + saveName)
 		
 # Note: This can be called from anywhere inside the tree. This function
 # is path independent.
 # if no file name is provide, use the name "lastSave"
-func load_piece(name : String = "lastSave"):
+func load_piece(parentNode: String, saveName : String = "lastSave"):
 	
 	
-	if not FileAccess.file_exists("user://save/" +name + ".save"):
+	if not FileAccess.file_exists("user://save/" + saveName + ".save"):
+		print( saveName + " doesn't exist")
 		return # Error! We don't have a save to load.
 
 	# Load the file line by line and process that dictionary to restore
 	# the object it represents.
-	var save_piece = FileAccess.open(("user://save/" +name + ".save"), FileAccess.READ)
-	while save_piece.get_position() < save_piece.get_length():
-		var json_string = save_piece.get_line()
+	var savePiece = FileAccess.open(("user://save/" + saveName + ".save"), FileAccess.READ)
+	while savePiece.get_position() < savePiece.get_length():
+		var json_string = savePiece.get_line()
 
 		# Creates the helper class to interact with JSON
 		var json = JSON.new()
@@ -168,12 +162,12 @@ func load_piece(name : String = "lastSave"):
 
 		# Firstly, we need to create the object and add it to the tree and set its position.
 		var new_object = load(node_data["filename"]).instantiate()
-		get_node(node_data["parent"]).add_child(new_object)
+		get_node(parentNode).add_child(new_object)
 		new_object.setPos(Vector3(node_data["pos_x"], node_data["pos_y"],node_data["pos_z"]))
 		new_object.clicked.connect(select_piece)
 		new_object.add_to_group("Persist")
 		
-	print("file loaded")
+	print("file loaded : " + saveName)
 	
 		# Now we set the remaining variables. Pas utilise pour les pieces pour le moment
 		#for i in node_data.keys():

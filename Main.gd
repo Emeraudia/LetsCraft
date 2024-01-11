@@ -13,7 +13,7 @@ func _ready():
 func _process(_delta):
 	selection_mode()
 
-#selection de la methode de selection des pieces
+# Gestion des input pour les raccourcis clavier
 func selection_mode():
 	if (Input.is_action_pressed("selection")): # key b selection mode
 		State.set_editor_mode(State.EditorMode.Selection)
@@ -25,11 +25,11 @@ func selection_mode():
 		$GestionPiece.delete_pieces()
 	elif(Input.is_action_just_pressed("save")): #key ctr+s save the piece's list
 		$GestionPiece.save_piece()
-	elif(Input.is_action_just_pressed("load")): #key ctr+l load the last save
-		$GestionPiece.load_piece()
+	elif(Input.is_action_just_pressed("load")): #key ctr+l load the last save (fast load)
+		$GestionPiece.load_piece("/root/main/GestionPiece/PieceListe")
 
-
-func _on_editor_mode(x):
+# Gestion des inputs via l'UI
+func _on_editor_mode(x,y):
 	if x=="move" :
 		State.set_editor_mode(State.EditorMode.Translation)
 	
@@ -44,3 +44,6 @@ func _on_editor_mode(x):
 		
 	if x=="camera":
 		State.set_editor_mode(State.EditorMode.Camera)
+		
+	if x=="load":
+		$GestionPiece.load_piece("/root/main/GestionPiece/PieceListe", y)
