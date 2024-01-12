@@ -9,8 +9,8 @@ func _on_move_button_pressed():
 	mode.emit("move","null")
 
 func _on_new_cube_button_pressed():
-	#mode.emit("new")
 	$ChooseElement.update_save_dir()
+	$ChooseElement.update()
 	$ChooseElement.visible = true;
 
 	

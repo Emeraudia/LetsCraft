@@ -24,9 +24,9 @@ func selection_mode():
 	elif(Input.is_action_just_pressed("delete")): #key backspace pour supprimer la selection
 		$GestionPiece.delete_pieces()
 	elif(Input.is_action_just_pressed("save")): #key ctr+s save the piece's list
-		$GestionPiece.save_piece()
+		Save.save_piece()
 	elif(Input.is_action_just_pressed("load")): #key ctr+l load the last save (fast load)
-		$GestionPiece.load_piece("/root/main/GestionPiece/PieceListe")
+		Save.load_piece("/root/main/GestionPiece/PieceListe")
 
 # Gestion des inputs via l'UI
 func _on_editor_mode(x,y):
@@ -46,4 +46,4 @@ func _on_editor_mode(x,y):
 		State.set_editor_mode(State.EditorMode.Camera)
 		
 	if x=="load":
-		$GestionPiece.load_piece("/root/main/GestionPiece/PieceListe", y)
+		Save.load_piece("/root/main/GestionPiece/PieceListe", y)

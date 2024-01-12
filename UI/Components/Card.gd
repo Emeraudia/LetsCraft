@@ -6,7 +6,6 @@ signal cardEvent
 enum Event { PRESSED }
 
 @export var title : String
-var instanceDemo
 
 func _ready():
 	$MarginContainer/Label.text = title

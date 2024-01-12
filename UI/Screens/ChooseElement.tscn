@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqtu61jmat1t5"]
+[gd_scene load_steps=2 format=3 uid="uid://cqtu61jmat1t5"]
 
 [ext_resource type="Script" path="res://UI/Screens/ChooseElement.gd" id="1_3fwfg"]
-[ext_resource type="PackedScene" uid="uid://dws1mi11315d6" path="res://UI/Components/Card.tscn" id="1_4flik"]
 
 [node name="ChooseElement" type="Control"]
 layout_mode = 3
@@ -44,11 +43,3 @@ layout_mode = 2
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
 alignment = 1
-
-[node name="Cube" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
-layout_mode = 2
-title = "Cube"
-
-[node name="Box" parent="ScrollContainer/MarginContainer/HFlowContainer" instance=ExtResource("1_4flik")]
-layout_mode = 2
-title = "Boite"
