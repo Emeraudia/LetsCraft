@@ -23,6 +23,11 @@ func _ready():
 	$ObjetListe/Obj/Mesh.mesh = newMesh
 	for obj in $ObjetListe.get_children() :
 		obj.get_child(0).material_override = newMaterial
+	var sp = get_pos_size()
+	#anchor_modif(sp[1],sp[0])
+	antene_modif(sp[1],sp[0])
+	$AnchorListe.visible = false
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,6 +36,7 @@ func _process(_delta):
 		var sp = get_pos_size()
 		#anchor_modif(sp[1],sp[0])
 		antene_modif(sp[1],sp[0])
+		
 	if(Input.is_action_just_pressed("resize")):
 		resize()
 		
@@ -86,10 +92,9 @@ func anchor_modif(piece_size,pos):
 			child.set_collision_layer_value(2,true)
 			child.set_collision_mask_value(2,true)
 			$AnchorListe.add_child(child)
-
 	
 func antene_modif(piece_size,pos):
-	for decay in $AnteneListe.get_children():
+	for decay in $AnchorListe.get_children():
 		decay.queue_free()
 	
 	var antene = load("res://gestion_piece/create_bloc/anchor.tscn")
