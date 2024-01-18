@@ -8,6 +8,8 @@ var mouseCurrentPos = Vector2(0,0)
 var listSelection = Array()
 var node_camera
 
+var Piece_VIEW = State.View.SELECT
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#recupere la camera du viewport actif (normalement y en a qu'un et il est dans le main pour l'instant)
@@ -33,6 +35,18 @@ func _process(_delta):
 		&& State.get_editor_mode() == State.EditorMode.Translation):
 			
 		move_pieces()
+	
+	#Suppresion des contraintes 
+	#les antennes sont insensibles jusqu'as ce qu'elle sorte d'une piece
+	if(Input.is_action_pressed("BreakContrainte")):
+		for s in listSelection:
+			s.removeAllContrainte()
+	if(Input.is_action_just_pressed("change_view")):
+		match(Piece_VIEW):
+			State.View.ABSORB:
+				Piece_VIEW = State.View.SELECT
+			State.View.SELECT:
+				Piece_VIEW = State.View.ABSORB
 
 
 #fonction de creation d'une piece
@@ -78,14 +92,16 @@ func move_pieces():
 func select_piece(node):
 	if(State.get_editor_mode() == State.EditorMode.Selection):
 		if(listSelection.find(node) == -1):
-			node.change_color(Color(1, 1, 0, 1.0))
+			node.absorbChild()
+			node.select = true
 			listSelection.append(node)
 		else:
+			node.select = false
+			node.absorbChild(false)
 			deselect_piece(node)	
 
 func deselect_piece(node):
 	listSelection.remove_at(listSelection.find(node))
-	node.change_color(Color(0.42, 0.69, 0.13, 1.0))
 			
 #deselectionne toutes les pieces
 func unselectAll():
@@ -97,7 +113,9 @@ func unselectAll():
 func delete_pieces():
 	
 	for i in listSelection.size():
-		listSelection.pop_front().queue_free()
+		var node = listSelection.pop_front()
+		node.removeAllContrainte()
+		node.queue_free()
 
 
 
