@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://6ou4f1qwuioe"]
+[gd_scene load_steps=5 format=3 uid="uid://6ou4f1qwuioe"]
 
 [ext_resource type="Script" path="res://UI/Screens/Editor.gd" id="1_kgirg"]
 [ext_resource type="FontFile" uid="uid://k44rcsfreskj" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_1ggqa"]
 [ext_resource type="Theme" uid="uid://dmhyy2kodji67" path="res://themes/UI.tres" id="2_lsicw"]
 [ext_resource type="Script" path="res://addons/fontawesome/FontAwesome.gd" id="3_brpmf"]
-[ext_resource type="PackedScene" uid="uid://cqtu61jmat1t5" path="res://UI/Screens/ChooseElement.tscn" id="5_2vtu7"]
 
 [node name="Editor" type="Control"]
 layout_mode = 3
@@ -197,13 +196,8 @@ grow_vertical = 2
 theme = ExtResource("2_lsicw")
 flat = true
 
-[node name="ChooseElement" parent="." instance=ExtResource("5_2vtu7")]
-visible = false
-layout_mode = 1
-
 [connection signal="pressed" from="MarginContainer/HBoxContainer/SelectContainer/SelectButton" to="." method="_on_select_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/MoveContainer/MoveButton" to="." method="_on_move_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/NewCubeContainer/NewCubeButton" to="." method="_on_new_cube_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/EditShapeContainer/EditShapeButton" to="." method="_on_edit_shape_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/CameraContainer/CameraButton" to="." method="_on_camera_button_pressed"]
-[connection signal="chooseElement" from="ChooseElement" to="." method="_on_choose_element_choose_element"]

@@ -12,8 +12,6 @@ var Piece_VIEW = State.View.SELECT
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	get_node("PieceListe/Piece").clicked.connect(select_piece)
-	
 	#recupere la camera du viewport actif (normalement y en a qu'un et il est dans le main pour l'instant)
 	node_camera = get_parent().get_viewport().get_camera_3d()
 
@@ -51,7 +49,6 @@ func _process(_delta):
 				Piece_VIEW = State.View.ABSORB
 
 
-
 #fonction de creation d'une piece
 #ne prend pas de parametre et ne renvoie rien
 #creer la piece a l'endroit clicke
@@ -68,6 +65,7 @@ func create_piece():
 	instance.setPos(mouseOrigin)
 	get_node("PieceListe").add_child(instance)
 	instance.clicked.connect(select_piece)
+	instance.add_to_group("Persist") #on l'ajoute au group persist afin de la sauvegarder
 
 #permet de bouger les pieces selectionnees
 #le mouvement est relative au premier clique de la souris
@@ -118,4 +116,6 @@ func delete_pieces():
 		var node = listSelection.pop_front()
 		node.removeAllContrainte()
 		node.queue_free()
+
+
 
