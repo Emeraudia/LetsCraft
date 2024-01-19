@@ -9,6 +9,10 @@ Il est conçu et réalisé par une équipe de 4 étudiants. Cette application s'
 
 &emsp; Pour résoudre ce problème, nous proposons une application mobile permettant la conception simple de meubles par blocks. De plus, L'application permettra de placer automatiquement les moyens de fixations (vis, clou, etc ...). Un manuel de montage sera aussi généré à la fin de la conception afin de rendre le montage simple et sans prise de tête.
 
+## Procédure d'installation
+
+Rendez vous sur le github 
+
 ## Features
 - Visualization
 - Customizable
