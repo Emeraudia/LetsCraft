@@ -27,3 +27,4 @@ Sur PC, afin de faciliter la gestion des modes, il existe des raccourcis clavier
 - `o` : Mode mouvement
 - `c` : Mode création 
 - `backspace` : Supprime les pièces sélectionnées
+- `x` : Décole toutes les pièces sélectionnées de leur assemblage

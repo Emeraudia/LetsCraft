@@ -19,3 +19,4 @@ Raccourcis clavier et touches :
 - `o` -> mode mouvement -> click et glisser pour deplacer
 - `c` -> mode creation -> click gauche pour creer une piece 
 - `backspace` -> supprime les pieces selectionnees
+- `x` : Décole toutes les pièces sélectionnées de leur assemblage
