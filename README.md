@@ -17,7 +17,7 @@ Pour résoudre ce problème, nous proposons une application mobile permettant la
 
 ## Installation
 
-Pour installer l'application et la tester, il existe deux possibilté, via l'exécutable fournit ou via godot directement :
+Pour installer l'application et la tester, il existe deux possibilté, via l'exécutable fournit ou via godot directement. Dans cette partie, toute réference à un chemin, ce fera par rapport à la branche dévelop du git.
 
 1. <B>Via l'exécutable (recommandé)</B>
 
