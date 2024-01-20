@@ -14,6 +14,8 @@ var Piece_VIEW = State.View.SELECT
 func _ready():
 	#recupere la camera du viewport actif (normalement y en a qu'un et il est dans le main pour l'instant)
 	node_camera = get_parent().get_viewport().get_camera_3d()
+	
+	generate_start_piece()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -117,5 +119,15 @@ func delete_pieces():
 		node.removeAllContrainte()
 		node.queue_free()
 
+#code un peu sale pour crée des pieces au premier lancement
+func generate_start_piece():
+	
+	
+	Save.load_start_piece("/root/main/GestionPiece/PieceListe","empty")
+	Save.save_start_piece("empty")
+	for node in get_node("PieceListe").get_children():
+		node.remove_from_group("Persist")
+		node.removeAllContrainte()
+		node.queue_free()
 
 

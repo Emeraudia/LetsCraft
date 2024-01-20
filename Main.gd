@@ -7,6 +7,7 @@ func _ready():
 	var scene_gestion_piece = preload("res://gestion_piece/GestionPiece.tscn")
 	var instance_gestion_piece = scene_gestion_piece.instantiate()
 	add_child(instance_gestion_piece)
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

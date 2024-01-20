@@ -1,0 +1,4 @@
+{"filename":"res://gestion_piece/create_bloc/piece.tscn","parent":"/root/main/GestionPiece/PieceListe","pos_x":2.30908584594727,"pos_y":-0.22378009557724,"pos_z":0}
+{"filename":"res://gestion_piece/create_bloc/piece.tscn","parent":"/root/main/GestionPiece/PieceListe","pos_x":2.30908584594727,"pos_y":0.776219725608826,"pos_z":0}
+{"filename":"res://gestion_piece/create_bloc/piece.tscn","parent":"/root/main/GestionPiece/PieceListe","pos_x":2.30908584594727,"pos_y":1.77621912956238,"pos_z":0}
+{"filename":"res://gestion_piece/create_bloc/piece.tscn","parent":"/root/main/GestionPiece/PieceListe","pos_x":2.30908584594727,"pos_y":-1.22378027439117,"pos_z":0}

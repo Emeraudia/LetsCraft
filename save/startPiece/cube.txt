@@ -1,0 +1,1 @@
+{"filename":"res://gestion_piece/create_bloc/piece.tscn","parent":"/root/main/GestionPiece/PieceListe","pos_x":0.142097473144531,"pos_y":0.0592074133455753,"pos_z":0}
