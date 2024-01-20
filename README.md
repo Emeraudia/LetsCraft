@@ -21,11 +21,11 @@ Pour installer l'application et la tester, il existe deux possibilté, via l'ex�
 
 1. <B>Via l'exécutable (recommandé)</B>
 
-Si vous choisissez cette méthode, il est inutile de télécharger tout le projet. Rendez vous dans le dossier "[executable](executable)" puis télécharger les deux fichiers contenu dans le dossier de votre distributions. Le fichier .pck contient les données de l'application tandis ce que l'autre fichier est l'exécutable, les deux fichiers sont donc nécéssaire mais seul un à lancer.
+Si vous choisissez cette méthode, il est inutile de télécharger tout le projet. Rendez vous dans le dossier "[executable](executable)" puis télécharger le fichier contenu dans le dossier de votre distributions.
 
-Exemple : si vous êtes un utilisateur de windows, dans le dossier [executable/windows](executable/windows), télécharger "Let's_craft_v0.5.pck" et "Let's_craft_v0.5.exe". exécuter ensuite le .exe et voila, vous pouvez profiter de let's craft !
+Exemple : si vous êtes un utilisateur de windows, dans le dossier [executable/windows](executable/windows), télécharger "Let's_craft_v0.5.exe". exécuter ensuite le .exe et voila, vous pouvez profiter de let's craft !
 
-Le principe est le même pour linux. Pour android, il n'y a qu'un fichier .apk (attention la dernière version pour android n'a pas été tester et peu comporter des bugs inconnu). Il n'y a malheureusement pas d'exécutable pour MacOs pour le moment dû aux certificats requis.
+Le principe est le même pour linux. Il n'y a malheureusement pas d'exécutable pour MacOs pour le moment dû aux certificats requis. De même pour android. Mais pas de panique, ils arriveront bientôt !
 
 
 2. <B>Via Godot (en cas de problème avec la première méthode)</B>

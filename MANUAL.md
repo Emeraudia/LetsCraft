@@ -41,4 +41,10 @@ Sur PC, afin de faciliter la gestion des modes, même si l'UI fonctionne, il exi
 - `ctr+s` : Sauvegarde le travail en cours (par defaut la sauvegarde s'appelle "lastSave")
 - `ctr+l` : Charge la sauvegarde appeler "lastSave"  
 
-Attention cependant, l'UI et les commandes ne sont pas encore bien reliés et des décallages peuvent apparaître. 
+
+## Bugs
+Attention : l'application étant en cours de développement, certains ajouts récents peuvent présenter des bugs ou ne pas être implémenter entièrement.  
+Exemple de bugs/implémentation non terminer :
+- Il n'est pour l'instant possible de ne faire qu'une seul sauvegarde
+- les pièces ce superposent si sauvegardées puis chargées à la suite sans les avoir déplacées entre temps
+- L'UI et les commandes ne sont pas encore bien reliés et des décallages peuvent apparaître.
