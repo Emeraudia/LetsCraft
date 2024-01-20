@@ -6,3 +6,5 @@ android/
 .import/
 export.cfg
 export_presets.cfg
+*.jpg.import
+*.png.import
