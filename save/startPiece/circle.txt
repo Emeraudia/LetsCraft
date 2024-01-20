@@ -1,0 +1,8 @@
+{"filename":"res://gestion_piece/create_bloc/piece.tscn","parent":"/root/main/GestionPiece/PieceListe","pos_x":1.31242215633392,"pos_y":-0.14743822813034,"pos_z":-0.02994775772095}
+{"filename":"res://gestion_piece/create_bloc/piece.tscn","parent":"/root/main/GestionPiece/PieceListe","pos_x":1.31242215633392,"pos_y":0.852561712265015,"pos_z":-0.02994775772095}
+{"filename":"res://gestion_piece/create_bloc/piece.tscn","parent":"/root/main/GestionPiece/PieceListe","pos_x":1.31242215633392,"pos_y":1.85256195068359,"pos_z":-0.02994775772095}
+{"filename":"res://gestion_piece/create_bloc/piece.tscn","parent":"/root/main/GestionPiece/PieceListe","pos_x":0.312422215938568,"pos_y":1.85256195068359,"pos_z":-0.02994775772095}
+{"filename":"res://gestion_piece/create_bloc/piece.tscn","parent":"/root/main/GestionPiece/PieceListe","pos_x":-0.68757778406143,"pos_y":0.852561712265015,"pos_z":-0.02994775772095}
+{"filename":"res://gestion_piece/create_bloc/piece.tscn","parent":"/root/main/GestionPiece/PieceListe","pos_x":-0.68757778406143,"pos_y":1.85256195068359,"pos_z":-0.02994775772095}
+{"filename":"res://gestion_piece/create_bloc/piece.tscn","parent":"/root/main/GestionPiece/PieceListe","pos_x":-0.68757778406143,"pos_y":-0.14743822813034,"pos_z":-0.02994775772095}
+{"filename":"res://gestion_piece/create_bloc/piece.tscn","parent":"/root/main/GestionPiece/PieceListe","pos_x":0.312422215938568,"pos_y":-0.14743822813034,"pos_z":-0.02994775772095}

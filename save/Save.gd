@@ -98,7 +98,6 @@ func load_demo(parentNode: String, saveName : String = "lastSave"):
 	
 	
 	if not FileAccess.file_exists("user://save/" + saveName + ".save"):
-		print( saveName + " doesn't exist")
 		return # Error! We don't have a save to load.
 
 	# Load the file line by line and process that dictionary to restore
@@ -123,5 +122,61 @@ func load_demo(parentNode: String, saveName : String = "lastSave"):
 		var new_object = load(node_data["filename"]).instantiate()
 		get_node(parentNode).add_child(new_object)
 		new_object.setPos(Vector3(node_data["pos_x"], node_data["pos_y"],node_data["pos_z"]))
-		
-	print("file loaded : " + saveName)
+
+
+
+#permet d'ajouter des pieces directement et automatiquement au lancement du projet (on triche)
+func load_start_piece(parentNode: String, saveName : String = "lastSave"):
+	
+	if not FileAccess.file_exists( OS.get_executable_path() + saveName + ".txt"):
+		return # Error! We don't have a save to load.
+
+	# Load the file line by line and process that dictionary to restore
+	# the object it represents.
+	var savePiece = FileAccess.open((OS.get_executable_path() + saveName + ".txt"), FileAccess.READ)
+	while savePiece.get_position() < savePiece.get_length():
+		var json_string = savePiece.get_line()
+
+		# Creates the helper class to interact with JSON
+		var json = JSON.new()
+
+		# Check if there is any error while parsing the JSON string, skip in case of failure
+		var parse_result = json.parse(json_string)
+		if not parse_result == OK:
+			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			continue
+
+		# Get the data from the JSON object
+		var node_data = json.get_data()
+
+		# Firstly, we need to create the object and add it to the tree and set its position.
+		var new_object = load(node_data["filename"]).instantiate()
+		get_node(parentNode).add_child(new_object)
+		new_object.setPos(Vector3(node_data["pos_x"], node_data["pos_y"],node_data["pos_z"]))
+		new_object.clicked.connect(get_node("/root/main/GestionPiece").select_piece)
+		new_object.add_to_group("Persist")
+
+func save_start_piece(saveName : String = "lastSave"):
+	
+
+	var savePiece = FileAccess.open("user://save/" + saveName + ".save", FileAccess.WRITE)
+	var saveNodes = get_tree().get_nodes_in_group("Persist")
+	for node in saveNodes:
+		# Check the node is an instanced scene so it can be instanced again during load.
+		if node.scene_file_path.is_empty():
+			print( saveName + " doesn't exist bouh")
+			continue
+
+		# Check the node has a save function.
+		if !node.has_method("save"):
+			continue
+
+		# Call the node's save function.
+		var node_data = node.call("save")
+
+		# JSON provides a static method to serialized JSON string.
+		var json_string = JSON.stringify(node_data)
+
+		# Store the save dictionary as a new line in the save file.
+		savePiece.store_line(json_string)
+
