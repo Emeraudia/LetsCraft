@@ -1,10 +1,13 @@
-[gd_scene format=3 uid="uid://dlephpakllf0c"]
+[gd_scene load_steps=2 format=3 uid="uid://dlephpakllf0c"]
+
+[ext_resource type="Script" path="res://UI/Screens/EditElement.gd" id="1_p8en0"]
 
 [node name="EditElement" type="Control"]
 layout_mode = 3
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
+script = ExtResource("1_p8en0")
 metadata/_edit_vertical_guides_ = [-413.0]
 
 [node name="Container" type="PanelContainer" parent="."]
@@ -97,3 +100,5 @@ popup/item_2/id = 2
 [node name="Button" type="Button" parent="Container/MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 text = "Valider"
+
+[connection signal="pressed" from="Container/MarginContainer/HBoxContainer/VBoxContainer2/Button" to="." method="_on_button_pressed"]
