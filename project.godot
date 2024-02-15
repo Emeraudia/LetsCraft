@@ -23,8 +23,9 @@ Save="*res://save/Save.gd"
 
 [display]
 
-window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/size/viewport_width=960
+window/size/viewport_height=1280
+window/stretch/aspect="ignore"
 window/handheld/orientation=6
 window/vsync/vsync_mode=2
 

@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://dlephpakllf0c"]
+
+[node name="EditElement" type="Control"]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+metadata/_edit_vertical_guides_ = [-413.0]
+
+[node name="Container" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="ColorRect" type="ColorRect" parent="Container"]
+layout_mode = 2
+color = Color(0.223529, 0.223529, 0.223529, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Container"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Container/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="X" type="HBoxContainer" parent="Container/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="Container/MarginContainer/HBoxContainer/VBoxContainer/X"]
+layout_mode = 2
+text = "X"
+
+[node name="SpinBox" type="SpinBox" parent="Container/MarginContainer/HBoxContainer/VBoxContainer/X"]
+layout_mode = 2
+
+[node name="Y" type="HBoxContainer" parent="Container/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="Container/MarginContainer/HBoxContainer/VBoxContainer/Y"]
+layout_mode = 2
+text = "Y"
+
+[node name="SpinBox" type="SpinBox" parent="Container/MarginContainer/HBoxContainer/VBoxContainer/Y"]
+layout_mode = 2
+
+[node name="Z" type="HBoxContainer" parent="Container/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="Container/MarginContainer/HBoxContainer/VBoxContainer/Z"]
+layout_mode = 2
+text = "Z"
+
+[node name="SpinBox" type="SpinBox" parent="Container/MarginContainer/HBoxContainer/VBoxContainer/Z"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="Container/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Container/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Container/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Couleur"
+
+[node name="OptionButton" type="OptionButton" parent="Container/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+item_count = 3
+selected = 0
+allow_reselect = true
+popup/item_0/text = "Bois"
+popup/item_0/id = 0
+popup/item_1/text = "Acier"
+popup/item_1/id = 1
+popup/item_2/text = "Uranium"
+popup/item_2/id = 2
+
+[node name="Button" type="Button" parent="Container/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Valider"
