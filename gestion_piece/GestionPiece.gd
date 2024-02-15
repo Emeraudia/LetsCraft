@@ -17,18 +17,13 @@ func _ready():
 	
 	generate_start_piece()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	
-	#creation de piece
-	#si on est en mode creation et que l'on fait un clique gauche
-	#on creer un piece
-	if(State.get_editor_mode() == State.EditorMode.Creation 
-		&& Input.is_action_just_pressed("click_gauche")):
-			
+func _unhandled_input(event):
+	if(State.get_editor_mode() == State.EditorMode.Creation \
+		&& Input.is_action_pressed("click_gauche")):
 		create_piece()
 	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):	
 	#mouvement des pieces
 	#si la liste de selection n'est pas vide, que l'on fait un clique gauche et que l'on est sur le mode mouvement
 	#alors on peux bouger la piece
