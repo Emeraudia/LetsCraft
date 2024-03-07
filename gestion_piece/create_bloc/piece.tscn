@@ -1,28 +1,86 @@
-[gd_scene load_steps=4 format=3 uid="uid://cegvubptsgcbw"]
+[gd_scene load_steps=10 format=3 uid="uid://cegvubptsgcbw"]
 
 [ext_resource type="Script" path="res://gestion_piece/create_bloc/piece.gd" id="1_ihh01"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_61k4y"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_sdxyn"]
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_8by2w"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c8ut7"]
+size = Vector3(0.01, 0.98, 0.98)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1cvd8"]
+size = Vector3(0.01, 0.98, 0.98)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_li6gy"]
+size = Vector3(0.98, 0.98, 0.01)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uc5dn"]
+size = Vector3(0.98, 0.98, 0.01)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xs3ay"]
+size = Vector3(0.98, 0.01, 0.98)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mngvk"]
+size = Vector3(0.98, 0.01, 0.98)
 
 [node name="Piece" type="Node3D"]
 script = ExtResource("1_ihh01")
 
 [node name="ObjetListe" type="Node3D" parent="."]
 
-[node name="Obj" type="Area3D" parent="ObjetListe"]
+[node name="Obj" type="Node3D" parent="ObjetListe"]
 
 [node name="Mesh" type="MeshInstance3D" parent="ObjetListe/Obj"]
 mesh = SubResource("BoxMesh_61k4y")
 skeleton = NodePath("")
+surface_material_override/0 = SubResource("ORMMaterial3D_8by2w")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ObjetListe/Obj"]
-shape = SubResource("BoxShape3D_sdxyn")
+[node name="L" type="Area3D" parent="ObjetListe/Obj"]
 
-[node name="AnchorListe" type="Node3D" parent="."]
+[node name="L" type="CollisionShape3D" parent="ObjetListe/Obj/L"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+shape = SubResource("BoxShape3D_c8ut7")
 
-[node name="AnteneListe" type="Node3D" parent="."]
+[node name="R" type="Area3D" parent="ObjetListe/Obj"]
 
-[connection signal="mouse_entered" from="ObjetListe/Obj" to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="ObjetListe/Obj" to="." method="_on_mouse_exited"]
+[node name="R" type="CollisionShape3D" parent="ObjetListe/Obj/R"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+shape = SubResource("BoxShape3D_1cvd8")
+
+[node name="F" type="Area3D" parent="ObjetListe/Obj"]
+
+[node name="F" type="CollisionShape3D" parent="ObjetListe/Obj/F"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+shape = SubResource("BoxShape3D_li6gy")
+
+[node name="B" type="Area3D" parent="ObjetListe/Obj"]
+
+[node name="B" type="CollisionShape3D" parent="ObjetListe/Obj/B"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+shape = SubResource("BoxShape3D_uc5dn")
+
+[node name="D" type="Area3D" parent="ObjetListe/Obj"]
+
+[node name="D" type="CollisionShape3D" parent="ObjetListe/Obj/D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_xs3ay")
+
+[node name="U" type="Area3D" parent="ObjetListe/Obj"]
+
+[node name="U" type="CollisionShape3D" parent="ObjetListe/Obj/U"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_mngvk")
+
+[connection signal="mouse_entered" from="ObjetListe/Obj/L" to="." method="_on_mouse_entered" binds= [0]]
+[connection signal="mouse_exited" from="ObjetListe/Obj/L" to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ObjetListe/Obj/R" to="." method="_on_mouse_entered" binds= [1]]
+[connection signal="mouse_exited" from="ObjetListe/Obj/R" to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ObjetListe/Obj/F" to="." method="_on_mouse_entered" binds= [2]]
+[connection signal="mouse_exited" from="ObjetListe/Obj/F" to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ObjetListe/Obj/B" to="." method="_on_mouse_entered" binds= [3]]
+[connection signal="mouse_exited" from="ObjetListe/Obj/B" to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ObjetListe/Obj/D" to="." method="_on_mouse_entered" binds= [4]]
+[connection signal="mouse_exited" from="ObjetListe/Obj/D" to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="ObjetListe/Obj/U" to="." method="_on_mouse_entered" binds= [5]]
+[connection signal="mouse_exited" from="ObjetListe/Obj/U" to="." method="_on_mouse_exited"]

@@ -23,6 +23,8 @@ func selection_mode():
 		State.set_editor_mode(State.EditorMode.Creation)
 	elif(Input.is_action_just_pressed("delete")): #key backspace pour supprimer la selection
 		$GestionPiece.delete_pieces()
+	elif(Input.is_action_just_pressed("Modif")): 
+		State.set_editor_mode(State.EditorMode.Modification)
 
 func _on_editor_mode(x):
 	if x=="move" :

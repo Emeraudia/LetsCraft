@@ -6,13 +6,14 @@ var mouseOrigin = Vector3(0,0,0)
 var mousePosOnClick = Vector2(0,0)
 var mouseCurrentPos = Vector2(0,0)
 var listSelection = Array()
+var nodeToDeform = null
 var node_camera
 
 var Piece_VIEW = State.View.SELECT
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	get_node("PieceListe/Piece").clicked.connect(select_piece)
+	# get_node("PieceListe/Piece").clicked.connect(select_piece)
 	
 	#recupere la camera du viewport actif (normalement y en a qu'un et il est dans le main pour l'instant)
 	node_camera = get_parent().get_viewport().get_camera_3d()
@@ -26,8 +27,7 @@ func _process(_delta):
 	#on creer un piece
 	if(State.get_editor_mode() == State.EditorMode.Creation 
 		&& Input.is_action_just_pressed("click_gauche")):
-			
-		create_piece()
+			create_piece()
 	
 	#mouvement des pieces
 	#si la liste de selection n'est pas vide, que l'on fait un clique gauche et que l'on est sur le mode mouvement
@@ -101,6 +101,13 @@ func select_piece(node):
 			node.select = false
 			node.absorbChild(false)
 			deselect_piece(node)	
+	if(State.get_editor_mode() == State.EditorMode.Modification):
+		if nodeToDeform != null:
+			nodeToDeform.canDeform = false
+		nodeToDeform = node
+		nodeToDeform.canDeform = true
+		print(nodeToDeform)
+		
 
 func deselect_piece(node):
 	listSelection.remove_at(listSelection.find(node))

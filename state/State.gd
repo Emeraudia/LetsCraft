@@ -4,6 +4,7 @@ enum EditorMode {
 	Selection,
 	Translation,
 	Creation,
+	Modification,
 	Camera
 }
 
