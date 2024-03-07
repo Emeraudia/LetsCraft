@@ -19,7 +19,7 @@ func _ready():
 	#recupere la camera du viewport actif (normalement y en a qu'un et il est dans le main pour l'instant)
 	node_camera = get_parent().get_viewport().get_camera_3d()
 	
-	generate_start_piece()
+	generate_default_piece()
 
 func _unhandled_input(event):
 	if(State.get_editor_mode() == State.EditorMode.Creation \
@@ -96,18 +96,21 @@ func update_gizmo():
 
 #fonction de creation d'une piece
 #ne prend pas de parametre et ne renvoie rien
-#creer la piece a l'endroit clicke
-func create_piece():
+#creer la piece a l'endroit clicke par defaut
+func create_piece(mouseCoord : bool = true, x : float = 0, y : float = 0, z : float = 0):
 	
 	var scene = load("res://gestion_piece/create_bloc/piece.tscn")
 	var instance = scene.instantiate()
-	
-	#coordonnees de la souris dans l'espace 3D par rapport à l'origine 
-	dragDist = node_camera.get_camera_transform().origin.distance_to(Vector3(0,0,0)) #origine du repère
-	mouseCurrentPos = get_viewport().get_mouse_position()
-	mouseOrigin = node_camera.project_position(mouseCurrentPos, dragDist)
-	
-	instance.setPos(mouseOrigin)
+	var coordinate = Vector3(0,0,0)
+	if (mouseCoord): # on utilise les coordonnees de la souris
+		#coordonnees de la souris dans l'espace 3D par rapport à l'origine 
+		dragDist = node_camera.get_camera_transform().origin.distance_to(Vector3(0,0,0)) #origine du repère
+		mouseCurrentPos = get_viewport().get_mouse_position()
+		coordinate = node_camera.project_position(mouseCurrentPos, dragDist)
+	else : # on utilise les coordonnees donnes
+		coordinate = Vector3(x,y,z)
+		
+	instance.setPos(coordinate)
 	get_node("PieceListe").add_child(instance)
 	instance.clicked.connect(select_piece)
 	instance.add_to_group("Persist") #on l'ajoute au group persist afin de la sauvegarder
@@ -170,17 +173,21 @@ func delete_pieces():
 	for i in listSelection.size():
 		var node = listSelection.pop_front()
 		node.removeAllContrainte()
-		node.queue_free()
-
-#code un peu sale pour crée des pieces au premier lancement
-func generate_start_piece():
-	
-	
-	Save.load_start_piece("/root/main/GestionPiece/PieceListe","empty")
-	Save.save_start_piece("empty")
-	for node in get_node("PieceListe").get_children():
 		node.remove_from_group("Persist")
-		node.removeAllContrainte()
 		node.queue_free()
 
+func select_all():
+	for i in get_node("PieceListe").get_children():
+		select_piece(i)
+
+
+func delete_all():
+	select_all()
+	delete_pieces()
+
+func generate_default_piece():
+	Save.save_piece("empty")
+	create_piece(false, 0,0,0)
+	Save.save_piece("cube")
+	delete_all()
 
