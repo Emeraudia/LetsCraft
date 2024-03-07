@@ -19,6 +19,7 @@ script = ExtResource("1_kgirg")
 
 [node name="ChooseElement" parent="." instance=ExtResource("5_2vtu7")]
 visible = false
+z_index = 2
 layout_mode = 1
 
 [node name="EditElement" parent="." instance=ExtResource("6_ijakx")]
