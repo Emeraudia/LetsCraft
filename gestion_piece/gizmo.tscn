@@ -1,0 +1,116 @@
+[gd_scene load_steps=11 format=3 uid="uid://s0735lxgugu0"]
+
+[ext_resource type="Script" path="res://gestion_piece/gizmo.gd" id="1_u5etv"]
+[ext_resource type="Shader" path="res://shaders/GizmoArrow.gdshader" id="1_yul10"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_js5pq"]
+top_radius = 0.05
+bottom_radius = 0.05
+radial_segments = 6
+rings = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ucpp3"]
+render_priority = 0
+shader = ExtResource("1_yul10")
+shader_parameter/color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rnvft"]
+top_radius = 0.0
+bottom_radius = 0.15
+height = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jy2dy"]
+size = Vector3(0.2, 2.5, 0.2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bevu0"]
+render_priority = 0
+shader = ExtResource("1_yul10")
+shader_parameter/color = Color(0, 0, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b82ce"]
+render_priority = 0
+shader = ExtResource("1_yul10")
+shader_parameter/color = Color(0, 0, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b7qqa"]
+render_priority = 0
+shader = ExtResource("1_yul10")
+shader_parameter/color = Color(0, 1, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s3si4"]
+render_priority = 0
+shader = ExtResource("1_yul10")
+shader_parameter/color = Color(0, 1, 0, 1)
+
+[node name="Gizmo" type="Node3D"]
+script = ExtResource("1_u5etv")
+
+[node name="ArrowX" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="bar" type="MeshInstance3D" parent="ArrowX"]
+mesh = SubResource("CylinderMesh_js5pq")
+surface_material_override/0 = SubResource("ShaderMaterial_ucpp3")
+
+[node name="tip" type="MeshInstance3D" parent="ArrowX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+mesh = SubResource("CylinderMesh_rnvft")
+surface_material_override/0 = SubResource("ShaderMaterial_ucpp3")
+
+[node name="AreaX" type="Area3D" parent="ArrowX"]
+collision_layer = 2
+collision_mask = 2
+collision_priority = 1000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ArrowX/AreaX"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.59579e-37, 0, 0, 1, 1.26218e-29, 0.241638, 0)
+shape = SubResource("BoxShape3D_jy2dy")
+
+[node name="ArrowZ" type="Node3D" parent="."]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 0, 1)
+
+[node name="bar" type="MeshInstance3D" parent="ArrowZ"]
+mesh = SubResource("CylinderMesh_js5pq")
+surface_material_override/0 = SubResource("ShaderMaterial_bevu0")
+
+[node name="tip" type="MeshInstance3D" parent="ArrowZ"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+mesh = SubResource("CylinderMesh_rnvft")
+surface_material_override/0 = SubResource("ShaderMaterial_b82ce")
+
+[node name="AreaZ" type="Area3D" parent="ArrowZ"]
+collision_layer = 2
+collision_mask = 2
+collision_priority = 1000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ArrowZ/AreaZ"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.59579e-37, 0, 0, 1, 1.26218e-29, 0.241638, 0)
+shape = SubResource("BoxShape3D_jy2dy")
+
+[node name="ArrowY" type="Node3D" parent="."]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, 0, 1.91069e-15, 0, 1, 0)
+
+[node name="bar" type="MeshInstance3D" parent="ArrowY"]
+mesh = SubResource("CylinderMesh_js5pq")
+surface_material_override/0 = SubResource("ShaderMaterial_b7qqa")
+
+[node name="tip" type="MeshInstance3D" parent="ArrowY"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+mesh = SubResource("CylinderMesh_rnvft")
+surface_material_override/0 = SubResource("ShaderMaterial_s3si4")
+
+[node name="AreaY" type="Area3D" parent="ArrowY"]
+collision_layer = 2
+collision_mask = 2
+collision_priority = 1000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ArrowY/AreaY"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.59579e-37, 0, 0, 1, 1.26218e-29, 0.241638, 0)
+shape = SubResource("BoxShape3D_jy2dy")
+
+[connection signal="mouse_entered" from="ArrowX/AreaX" to="." method="_on_area_x_mouse_entered"]
+[connection signal="mouse_exited" from="ArrowX/AreaX" to="." method="_on_area_x_mouse_exited"]
+[connection signal="mouse_entered" from="ArrowZ/AreaZ" to="." method="_on_area_z_mouse_entered"]
+[connection signal="mouse_exited" from="ArrowZ/AreaZ" to="." method="_on_area_z_mouse_exited"]
+[connection signal="mouse_entered" from="ArrowY/AreaY" to="." method="_on_area_y_mouse_entered"]
+[connection signal="mouse_exited" from="ArrowY/AreaY" to="." method="_on_area_y_mouse_exited"]

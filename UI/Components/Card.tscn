@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://dws1mi11315d6"]
+[gd_scene load_steps=7 format=3 uid="uid://dws1mi11315d6"]
 
 [ext_resource type="Script" path="res://UI/Components/Card.gd" id="1_iok5u"]
-[ext_resource type="PackedScene" uid="uid://cegvubptsgcbw" path="res://gestion_piece/create_bloc/piece.tscn" id="2_n6pgg"]
 [ext_resource type="Script" path="res://gestion_piece/create_bloc/anim.gd" id="3_q4ffx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n5viv"]
@@ -50,10 +49,8 @@ render_target_update_mode = 4
 environment = SubResource("Environment_m8gjj")
 
 [node name="Model" type="Node3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.51317)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 script = ExtResource("3_q4ffx")
-
-[node name="Piece" parent="SubViewportContainer/SubViewport/Model" instance=ExtResource("2_n6pgg")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 0, 0)
