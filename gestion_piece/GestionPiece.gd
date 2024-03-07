@@ -8,32 +8,33 @@ var mouseCurrentPos = Vector2(0,0)
 var listSelection = Array()
 var node_camera
 
+var xMotion = false
+var yMotion = false
+var zMotion = false
+
 var Piece_VIEW = State.View.SELECT
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#recupere la camera du viewport actif (normalement y en a qu'un et il est dans le main pour l'instant)
 	node_camera = get_parent().get_viewport().get_camera_3d()
+	
 	generate_default_piece()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	
-	#creation de piece
-	#si on est en mode creation et que l'on fait un clique gauche
-	#on creer un piece
-	if(State.get_editor_mode() == State.EditorMode.Creation 
-		&& Input.is_action_just_pressed("click_gauche")):
-			
+func _unhandled_input(event):
+	if(State.get_editor_mode() == State.EditorMode.Creation \
+		&& Input.is_action_pressed("click_gauche")):
 		create_piece()
 	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):	
 	#mouvement des pieces
 	#si la liste de selection n'est pas vide, que l'on fait un clique gauche et que l'on est sur le mode mouvement
 	#alors on peux bouger la piece
-	if(!listSelection.is_empty() 
+	if(!listSelection.is_empty()
 		&& Input.is_action_pressed("click_gauche") 
 		&& State.get_editor_mode() == State.EditorMode.Translation):
-			
+		
 		move_pieces()
 	
 	#Suppresion des contraintes 
@@ -47,7 +48,51 @@ func _process(_delta):
 				Piece_VIEW = State.View.SELECT
 			State.View.SELECT:
 				Piece_VIEW = State.View.ABSORB
+	
+	if(!listSelection.is_empty()):
+		$Gizmo.visible = true
+		update_gizmo()
+		if($Gizmo.overX && Input.is_action_just_pressed("click_gauche")):
+			xMotion = true
+			yMotion = false
+			zMotion = false
+		if($Gizmo.overY && Input.is_action_just_pressed("click_gauche")):
+			xMotion = false
+			yMotion = true
+			zMotion = false
+		if($Gizmo.overZ && Input.is_action_just_pressed("click_gauche")):
+			xMotion = false
+			yMotion = false
+			zMotion = true
+	else:
+		$Gizmo.visible = false
+		
+	if(Input.is_action_just_released("click_gauche")):
+		xMotion = false
+		yMotion = false
+		zMotion = false
+		
+	if(xMotion):
+		move_pieces('x')
+	if(yMotion):
+		move_pieces('y')
+	if(zMotion):
+		move_pieces('z')
 
+func update_gizmo():
+	if listSelection.size() > 0:
+		var mX = 0;
+		var mY = 0;
+		var mZ = 0;
+		for i in listSelection:
+			var pos = i.global_transform.origin
+			mX += pos.x
+			mY += pos.y
+			mZ += pos.z
+		mX /= listSelection.size()
+		mY /= listSelection.size()
+		mZ /= listSelection.size()
+		$Gizmo.global_transform.origin = Vector3(mX, mY, mZ)
 
 #fonction de creation d'une piece
 #ne prend pas de parametre et ne renvoie rien
@@ -73,7 +118,7 @@ func create_piece(mouseCoord : bool = true, x : float = 0, y : float = 0, z : fl
 #permet de bouger les pieces selectionnees
 #le mouvement est relative au premier clique de la souris
 #ne prend pas de parametres, ne renvoie rien
-func move_pieces():
+func move_pieces(axis=null):
 	
 	mouseCurrentPos = get_viewport().get_mouse_position()
 		
@@ -82,6 +127,16 @@ func move_pieces():
 		mouseOrigin = node_camera.project_position(mouseCurrentPos, dragDist)
 	
 	var mouseCurrentPosGlobal = node_camera.project_position(mouseCurrentPos,dragDist) - mouseOrigin
+	
+	if axis == 'x':
+		mouseCurrentPosGlobal.y = 0;
+		mouseCurrentPosGlobal.z = 0;
+	if axis == 'y':
+		mouseCurrentPosGlobal.x = 0;
+		mouseCurrentPosGlobal.z = 0;
+	if axis == 'z':
+		mouseCurrentPosGlobal.x = 0;
+		mouseCurrentPosGlobal.y = 0;
 	
 	#on fait bouger toutes les pieces de la selection
 	for i in listSelection:
@@ -101,7 +156,7 @@ func select_piece(node):
 		else:
 			node.select = false
 			node.absorbChild(false)
-			deselect_piece(node)	
+			deselect_piece(node)
 
 func deselect_piece(node):
 	listSelection.remove_at(listSelection.find(node))

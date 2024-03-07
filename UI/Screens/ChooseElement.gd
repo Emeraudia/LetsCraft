@@ -39,12 +39,12 @@ func create_cards(title: String):
 	var card = load("res://UI/Components/Card.tscn").instantiate() # Charge la scene, l'instancie
 	card.setTitle(title) # Lui donne un titre
 	card.name = title # Donne un nom a la node
-	get_node("ScrollContainer/MarginContainer/HFlowContainer").add_child(card) # Ajoute la node
+	get_node("VBoxContainer/ScrollContainer/MarginContainer/HFlowContainer").add_child(card) # Ajoute la node
 
 # supprime toutes les cards non associes a une save
 func remove_cards():
 	
-	for i in get_node("ScrollContainer/MarginContainer/HFlowContainer").get_children():
+	for i in get_node("VBoxContainer/ScrollContainer/MarginContainer/HFlowContainer").get_children():
 		i.disconnect("cardEvent", _on_card_pressed)
 		i.queue_free()
 
@@ -58,6 +58,10 @@ func update():
 	for i in saves:
 		create_cards(i)
 	
-	for N in $ScrollContainer/MarginContainer/HFlowContainer.get_children():
+	for N in $VBoxContainer/ScrollContainer/MarginContainer/HFlowContainer.get_children():
 		N.connect("cardEvent", _on_card_pressed)
 		
+
+
+func _on_button_pressed():
+	chooseElement.emit("")
