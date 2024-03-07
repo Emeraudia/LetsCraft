@@ -1,23 +1,26 @@
 extends Control
 
-signal mode
+signal mode()
 
 func _on_select_button_pressed():
-	mode.emit("select")
+	mode.emit("select","null")
 
 func _on_move_button_pressed():
-	mode.emit("move")
+	mode.emit("move","null")
 
 func _on_new_cube_button_pressed():
-	#mode.emit("new")
+	$ChooseElement.update_save_dir()
+	$ChooseElement.update()
 	$ChooseElement.visible = true;
+
 	
 func _on_edit_shape_button_pressed():
-	mode.emit("edit")
+	#mode.emit("edit","null")
+	$EditElement.visible = true;
 
 func _on_camera_button_pressed():
-	mode.emit("camera")
+	mode.emit("camera","null")
 
 func _on_choose_element_choose_element(title: String):
-	print(title)
+	mode.emit("load",title)
 	$ChooseElement.visible = false;

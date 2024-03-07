@@ -28,3 +28,7 @@ func _on_mouse_exited():
 func _on_gui_input(event):
 	if event.is_pressed():
 		cardEvent.emit(Event.PRESSED, title)
+
+func setTitle(newTitle: String):
+	title = newTitle
+
