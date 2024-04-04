@@ -119,6 +119,6 @@ func load_demo(parentNode: String, saveName : String = "lastSave"):
 		var node_data = json.get_data()
 
 		# Firstly, we need to create the object and add it to the tree and set its position.
-		var new_object = load(node_data["filename"]).instantiate()
+		var new_object = load(node_data["filename"]).instantiate().getImage()
 		get_node(parentNode).add_child(new_object)
 		new_object.setPos(Vector3(node_data["pos_x"], node_data["pos_y"],node_data["pos_z"]))

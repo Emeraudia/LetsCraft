@@ -30,6 +30,9 @@ func selection_mode():
 		Save.save_piece()
 	elif(Input.is_action_just_pressed("load")): #key ctr+l load the last save (fast load)
 		Save.load_piece("/root/main/GestionPiece/PieceListe")
+	elif(Input.is_action_just_pressed("Contrainte")):  #key ctrl+n
+		State.set_editor_mode(State.EditorMode.Contrainte)
+		print("Contrainte")
 
 # Gestion des inputs via l'UI
 func _on_editor_mode(x,y):
@@ -51,3 +54,6 @@ func _on_editor_mode(x,y):
 		
 	if x=="load":
 		Save.load_piece("/root/main/GestionPiece/PieceListe", y)
+		
+	if x=="contrainte":
+		State.set_editor_mode(State.EditorMode.Contrainte)

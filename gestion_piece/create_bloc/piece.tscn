@@ -1,27 +1,47 @@
-[gd_scene load_steps=10 format=3 uid="uid://cegvubptsgcbw"]
+[gd_scene load_steps=16 format=3 uid="uid://cegvubptsgcbw"]
 
 [ext_resource type="Script" path="res://gestion_piece/create_bloc/piece.gd" id="1_ihh01"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_61k4y"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ekd6w"]
+albedo_color = Color(0, 0, 0, 1)
 
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_8by2w"]
+[sub_resource type="BoxMesh" id="BoxMesh_61k4y"]
+material = SubResource("StandardMaterial3D_ekd6w")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c8ut7"]
+size = Vector3(0.01, 0.98, 0.98)
+
+[sub_resource type="BoxMesh" id="BoxMesh_au6k0"]
 size = Vector3(0.01, 0.98, 0.98)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1cvd8"]
 size = Vector3(0.01, 0.98, 0.98)
 
+[sub_resource type="BoxMesh" id="BoxMesh_ms6is"]
+size = Vector3(0.01, 0.98, 0.98)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_li6gy"]
+size = Vector3(0.98, 0.98, 0.01)
+
+[sub_resource type="BoxMesh" id="BoxMesh_33215"]
 size = Vector3(0.98, 0.98, 0.01)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uc5dn"]
 size = Vector3(0.98, 0.98, 0.01)
 
+[sub_resource type="BoxMesh" id="BoxMesh_o0das"]
+size = Vector3(0.98, 0.98, 0.01)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_xs3ay"]
 size = Vector3(0.98, 0.01, 0.98)
 
+[sub_resource type="BoxMesh" id="BoxMesh_w7xcb"]
+size = Vector3(0.98, 0.01, 0.98)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_mngvk"]
+size = Vector3(0.98, 0.01, 0.98)
+
+[sub_resource type="BoxMesh" id="BoxMesh_81vv5"]
 size = Vector3(0.98, 0.01, 0.98)
 
 [node name="Piece" type="Node3D"]
@@ -34,43 +54,72 @@ script = ExtResource("1_ihh01")
 [node name="Mesh" type="MeshInstance3D" parent="ObjetListe/Obj"]
 mesh = SubResource("BoxMesh_61k4y")
 skeleton = NodePath("")
-surface_material_override/0 = SubResource("ORMMaterial3D_8by2w")
 
 [node name="L" type="Area3D" parent="ObjetListe/Obj"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+visible = false
 
 [node name="L" type="CollisionShape3D" parent="ObjetListe/Obj/L"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
 shape = SubResource("BoxShape3D_c8ut7")
 
+[node name="Mesh" type="MeshInstance3D" parent="ObjetListe/Obj/L"]
+mesh = SubResource("BoxMesh_au6k0")
+skeleton = NodePath("")
+
 [node name="R" type="Area3D" parent="ObjetListe/Obj"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+visible = false
 
 [node name="R" type="CollisionShape3D" parent="ObjetListe/Obj/R"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
 shape = SubResource("BoxShape3D_1cvd8")
 
+[node name="Mesh" type="MeshInstance3D" parent="ObjetListe/Obj/R"]
+mesh = SubResource("BoxMesh_ms6is")
+skeleton = NodePath("")
+
 [node name="F" type="Area3D" parent="ObjetListe/Obj"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+visible = false
 
 [node name="F" type="CollisionShape3D" parent="ObjetListe/Obj/F"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 shape = SubResource("BoxShape3D_li6gy")
 
+[node name="Mesh" type="MeshInstance3D" parent="ObjetListe/Obj/F"]
+mesh = SubResource("BoxMesh_33215")
+skeleton = NodePath("")
+
 [node name="B" type="Area3D" parent="ObjetListe/Obj"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+visible = false
 
 [node name="B" type="CollisionShape3D" parent="ObjetListe/Obj/B"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
 shape = SubResource("BoxShape3D_uc5dn")
 
+[node name="Mesh" type="MeshInstance3D" parent="ObjetListe/Obj/B"]
+mesh = SubResource("BoxMesh_o0das")
+skeleton = NodePath("")
+
 [node name="D" type="Area3D" parent="ObjetListe/Obj"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+visible = false
 
 [node name="D" type="CollisionShape3D" parent="ObjetListe/Obj/D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_xs3ay")
 
+[node name="Mesh" type="MeshInstance3D" parent="ObjetListe/Obj/D"]
+mesh = SubResource("BoxMesh_w7xcb")
+skeleton = NodePath("")
+
 [node name="U" type="Area3D" parent="ObjetListe/Obj"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
 
 [node name="U" type="CollisionShape3D" parent="ObjetListe/Obj/U"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_mngvk")
+
+[node name="Mesh" type="MeshInstance3D" parent="ObjetListe/Obj/U"]
+mesh = SubResource("BoxMesh_81vv5")
+skeleton = NodePath("")
 
 [connection signal="mouse_entered" from="ObjetListe/Obj/L" to="." method="_on_mouse_entered" binds= [0]]
 [connection signal="mouse_exited" from="ObjetListe/Obj/L" to="." method="_on_mouse_exited"]

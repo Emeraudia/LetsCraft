@@ -16,9 +16,7 @@ var zMotion = false
 var Piece_VIEW = State.View.SELECT
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	# get_node("PieceListe/Piece").clicked.connect(select_piece)
-	
+func _ready():	
 	#recupere la camera du viewport actif (normalement y en a qu'un et il est dans le main pour l'instant)
 	node_camera = get_parent().get_viewport().get_camera_3d()
 	
@@ -29,6 +27,8 @@ func _ready():
 		&& Input.is_action_just_pressed("click_gauche")):
 			create_piece()
 	generate_default_piece()
+	create_piece()
+	get_node("PieceListe/Piece").clicked.connect(select_piece)
 
 func _unhandled_input(event):
 	if(State.get_editor_mode() == State.EditorMode.Creation \
@@ -46,18 +46,6 @@ func _process(_delta):
 		
 		move_pieces()
 	
-	#Suppresion des contraintes 
-	#les antennes sont insensibles jusqu'as ce qu'elle sorte d'une piece
-	if(Input.is_action_pressed("BreakContrainte")):
-		for s in listSelection:
-			s.removeAllContrainte()
-	if(Input.is_action_just_pressed("change_view")):
-		match(Piece_VIEW):
-			State.View.ABSORB:
-				Piece_VIEW = State.View.SELECT
-			State.View.SELECT:
-				Piece_VIEW = State.View.ABSORB
-	
 	if(!listSelection.is_empty()):
 		$Gizmo.visible = true
 		update_gizmo()
@@ -74,7 +62,8 @@ func _process(_delta):
 			yMotion = false
 			zMotion = true
 	else:
-		$Gizmo.visible = false
+	#	$Gizmo.visible = false
+		pass
 		
 	if(Input.is_action_just_released("click_gauche")):
 		xMotion = false
@@ -87,6 +76,7 @@ func _process(_delta):
 		move_pieces('y')
 	if(zMotion):
 		move_pieces('z')
+		
 
 func update_gizmo():
 	if listSelection.size() > 0:
@@ -119,7 +109,7 @@ func create_piece(mouseCoord : bool = true, x : float = 0, y : float = 0, z : fl
 	else : # on utilise les coordonnees donnes
 		coordinate = Vector3(x,y,z)
 		
-	instance.setPos(coordinate)
+	#instance.setPos(coordinate)
 	get_node("PieceListe").add_child(instance)
 	instance.clicked.connect(select_piece)
 	instance.add_to_group("Persist") #on l'ajoute au group persist afin de la sauvegarder
@@ -156,15 +146,11 @@ func move_pieces(axis=null):
 
 #recupere la derniere piece cliquer et l'ajoute a la liste de selection
 #est appele lorsqu'elle recoit le signal "clicked" provenant de Piece.gd
-func select_piece(node):
+func select_piece(node):	
 	if(State.get_editor_mode() == State.EditorMode.Selection):
 		if(listSelection.find(node) == -1):
-			node.absorbChild()
-			node.select = true
 			listSelection.append(node)
 		else:
-			node.select = false
-			node.absorbChild(false)
 			deselect_piece(node)	
 	if(State.get_editor_mode() == State.EditorMode.Modification):
 		if nodeToDeform != null:
@@ -173,7 +159,7 @@ func select_piece(node):
 		nodeToDeform.canDeform = true
 		print(nodeToDeform)
 		
-			deselect_piece(node)
+		deselect_piece(node)
 
 func deselect_piece(node):
 	listSelection.remove_at(listSelection.find(node))
@@ -189,7 +175,6 @@ func delete_pieces():
 	
 	for i in listSelection.size():
 		var node = listSelection.pop_front()
-		node.removeAllContrainte()
 		node.remove_from_group("Persist")
 		node.queue_free()
 

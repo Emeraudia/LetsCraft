@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cruoqs26vwtdf"]
+[gd_scene load_steps=6 format=3 uid="uid://cruoqs26vwtdf"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_ltjda"]
 [ext_resource type="Script" path="res://camera/Mouvement.gd" id="2_j5f8h"]
 [ext_resource type="PackedScene" uid="uid://6ou4f1qwuioe" path="res://UI/Screens/Editor.tscn" id="3_fe407"]
 [ext_resource type="Material" uid="uid://ciw6as6nfuhb3" path="res://shaders/grid.tres" id="4_8aoc8"]
-[ext_resource type="PackedScene" uid="uid://cegvubptsgcbw" path="res://gestion_piece/create_bloc/piece.tscn" id="5_jdlu8"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_m3158"]
 material = ExtResource("4_8aoc8")
@@ -26,8 +25,5 @@ transform = Transform3D(1, 0, 0, 0, 0.821289, 0.570513, 0, -0.570513, 0.821289, 
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_m3158")
-
-[node name="Piece" parent="." instance=ExtResource("5_jdlu8")]
-transform = Transform3D(0.719846, -0.545575, 0.429149, 0.468618, 0.838062, 0.279374, -0.512073, 0, 0.858942, 0, 1.20483, 0)
 
 [connection signal="mode" from="Editor" to="." method="_on_editor_mode"]

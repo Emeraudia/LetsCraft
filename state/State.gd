@@ -5,7 +5,8 @@ enum EditorMode {
 	Translation,
 	Creation,
 	Modification,
-	Camera
+	Camera,
+	Contrainte
 }
 
 enum View {ABSORB,SELECT}
