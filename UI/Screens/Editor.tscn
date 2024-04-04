@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://addons/fontawesome/FontAwesome.gd" id="3_brpmf"]
 [ext_resource type="PackedScene" uid="uid://cqtu61jmat1t5" path="res://UI/Screens/ChooseElement.tscn" id="5_2vtu7"]
 [ext_resource type="PackedScene" uid="uid://ddxv87tipm8lc" path="res://UI/Popup/SaveField.tscn" id="6_d2s40"]
+[ext_resource type="PackedScene" uid="uid://dlephpakllf0c" path="res://UI/Screens/EditElement.tscn" id="6_ijakx"]
 
 [node name="Editor" type="Control"]
 layout_mode = 3
@@ -17,77 +18,46 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_kgirg")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="ChooseElement" parent="." instance=ExtResource("5_2vtu7")]
+visible = false
+z_index = 2
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.879
+
+[node name="EditElement" parent="." instance=ExtResource("6_ijakx")]
+visible = false
+layout_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 0.167969
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+[node name="ColorRect" type="ColorRect" parent="PanelContainer"]
 layout_mode = 2
 color = Color(0.0784314, 0.0784314, 0.0784314, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="SelectContainer" type="Control" parent="MarginContainer/HBoxContainer"]
+[node name="MoveContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SelectButton" type="Button" parent="MarginContainer/HBoxContainer/SelectContainer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_lsicw")
-flat = true
-
-[node name="SelectIcon" type="Label" parent="MarginContainer/HBoxContainer/SelectContainer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-auto_translate = false
-localize_numeral_system = false
-theme_override_fonts/font = ExtResource("2_1ggqa")
-theme_override_font_sizes/font_size = 64
-text = ""
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("3_brpmf")
-icon_size = 64
-icon_name = "arrow-pointer"
-
-[node name="MoveContainer" type="Control" parent="MarginContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/MoveContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="MoveButton" type="Button" parent="MarginContainer/HBoxContainer/MoveContainer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_lsicw")
-flat = true
-
-[node name="MoveIcon" type="Label" parent="MarginContainer/HBoxContainer/MoveContainer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MoveIcon" type="Label" parent="PanelContainer/HBoxContainer/MoveContainer/MarginContainer"]
+layout_mode = 2
 auto_translate = false
 localize_numeral_system = false
 theme_override_fonts/font = ExtResource("2_1ggqa")
@@ -99,18 +69,56 @@ script = ExtResource("3_brpmf")
 icon_size = 64
 icon_name = "arrows-up-down-left-right"
 
-[node name="NewCubeContainer" type="Control" parent="MarginContainer/HBoxContainer"]
+[node name="MoveButton" type="Button" parent="PanelContainer/HBoxContainer/MoveContainer"]
+layout_mode = 2
+theme = ExtResource("2_lsicw")
+flat = true
+
+[node name="SelectContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/SelectContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="SelectIcon" type="Label" parent="PanelContainer/HBoxContainer/SelectContainer/MarginContainer"]
+layout_mode = 2
+auto_translate = false
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("2_1ggqa")
+theme_override_font_sizes/font_size = 64
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_brpmf")
+icon_size = 64
+icon_name = "arrow-pointer"
+
+[node name="SelectButton" type="Button" parent="PanelContainer/HBoxContainer/SelectContainer"]
+layout_mode = 2
+theme = ExtResource("2_lsicw")
+flat = true
+
+[node name="NewCubeContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="NewCubeIcon" type="Label" parent="MarginContainer/HBoxContainer/NewCubeContainer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/NewCubeContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="NewCubeIcon" type="Label" parent="PanelContainer/HBoxContainer/NewCubeContainer/MarginContainer"]
+layout_mode = 2
 auto_translate = false
 localize_numeral_system = false
 theme_override_fonts/font = ExtResource("2_1ggqa")
@@ -122,28 +130,26 @@ script = ExtResource("3_brpmf")
 icon_size = 64
 icon_name = "square-plus"
 
-[node name="NewCubeButton" type="Button" parent="MarginContainer/HBoxContainer/NewCubeContainer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="NewCubeButton" type="Button" parent="PanelContainer/HBoxContainer/NewCubeContainer"]
+layout_mode = 2
 theme = ExtResource("2_lsicw")
 flat = true
 
-[node name="EditShapeContainer" type="Control" parent="MarginContainer/HBoxContainer"]
+[node name="EditShapeContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="EditShapeIcon" type="Label" parent="MarginContainer/HBoxContainer/EditShapeContainer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/EditShapeContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="EditShapeIcon" type="Label" parent="PanelContainer/HBoxContainer/EditShapeContainer/MarginContainer"]
+layout_mode = 2
 auto_translate = false
 localize_numeral_system = false
 theme_override_fonts/font = ExtResource("2_1ggqa")
@@ -155,28 +161,26 @@ script = ExtResource("3_brpmf")
 icon_size = 64
 icon_name = "hammer"
 
-[node name="EditShapeButton" type="Button" parent="MarginContainer/HBoxContainer/EditShapeContainer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="EditShapeButton" type="Button" parent="PanelContainer/HBoxContainer/EditShapeContainer"]
+layout_mode = 2
 theme = ExtResource("2_lsicw")
 flat = true
 
-[node name="CameraContainer" type="Control" parent="MarginContainer/HBoxContainer"]
+[node name="CameraContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="CameraIcon" type="Label" parent="MarginContainer/HBoxContainer/CameraContainer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/CameraContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="CameraIcon" type="Label" parent="PanelContainer/HBoxContainer/CameraContainer/MarginContainer"]
+layout_mode = 2
 auto_translate = false
 localize_numeral_system = false
 theme_override_fonts/font = ExtResource("2_1ggqa")
@@ -188,19 +192,10 @@ script = ExtResource("3_brpmf")
 icon_size = 64
 icon_name = "video"
 
-[node name="CameraButton" type="Button" parent="MarginContainer/HBoxContainer/CameraContainer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="CameraButton" type="Button" parent="PanelContainer/HBoxContainer/CameraContainer"]
+layout_mode = 2
 theme = ExtResource("2_lsicw")
 flat = true
-
-[node name="ChooseElement" parent="." instance=ExtResource("5_2vtu7")]
-visible = false
-layout_mode = 1
 
 [node name="SaveField" parent="." instance=ExtResource("6_d2s40")]
 visible = false

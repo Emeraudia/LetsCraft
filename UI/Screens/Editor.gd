@@ -15,7 +15,8 @@ func _on_new_cube_button_pressed():
 
 	
 func _on_edit_shape_button_pressed():
-	mode.emit("edit","null")
+	#mode.emit("edit","null")
+	$EditElement.visible = true;
 
 func _on_camera_button_pressed():
 	mode.emit("camera","null")

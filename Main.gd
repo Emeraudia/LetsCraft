@@ -43,7 +43,8 @@ func _on_editor_mode(x,y):
 		State.set_editor_mode(State.EditorMode.Creation)
 		
 	if x=="edit" :
-		Input.action_press("resize")
+		State.set_editor_mode(State.EditorMode.Creation)
+		# Input.action_press("resize")
 		
 	if x=="camera":
 		State.set_editor_mode(State.EditorMode.Camera)
