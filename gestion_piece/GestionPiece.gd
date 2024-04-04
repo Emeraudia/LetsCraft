@@ -28,56 +28,57 @@ func _unhandled_input(event):
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):	
-	#mouvement des pieces
-	#si la liste de selection n'est pas vide, que l'on fait un clique gauche et que l'on est sur le mode mouvement
-	#alors on peux bouger la piece
-	if(!listSelection.is_empty()
-		&& Input.is_action_pressed("click_gauche") 
-		&& State.get_editor_mode() == State.EditorMode.Translation):
+	if (State.get_input_mode() == State.InputMode.ACTIVATE):
+		#mouvement des pieces
+		#si la liste de selection n'est pas vide, que l'on fait un clique gauche et que l'on est sur le mode mouvement
+		#alors on peux bouger la piece
+		if(!listSelection.is_empty()
+			&& Input.is_action_pressed("click_gauche") 
+			&& State.get_editor_mode() == State.EditorMode.Translation):
+			
+			move_pieces()
 		
-		move_pieces()
-	
-	#Suppresion des contraintes 
-	#les antennes sont insensibles jusqu'as ce qu'elle sorte d'une piece
-	if(Input.is_action_pressed("BreakContrainte")):
-		for s in listSelection:
-			s.removeAllContrainte()
-	if(Input.is_action_just_pressed("change_view")):
-		match(Piece_VIEW):
-			State.View.ABSORB:
-				Piece_VIEW = State.View.SELECT
-			State.View.SELECT:
-				Piece_VIEW = State.View.ABSORB
-	
-	if(!listSelection.is_empty()):
-		$Gizmo.visible = true
-		update_gizmo()
-		if($Gizmo.overX && Input.is_action_just_pressed("click_gauche")):
-			xMotion = true
+		#Suppresion des contraintes 
+		#les antennes sont insensibles jusqu'as ce qu'elle sorte d'une piece
+		if(Input.is_action_pressed("BreakContrainte")):
+			for s in listSelection:
+				s.removeAllContrainte()
+		if(Input.is_action_just_pressed("change_view")):
+			match(Piece_VIEW):
+				State.View.ABSORB:
+					Piece_VIEW = State.View.SELECT
+				State.View.SELECT:
+					Piece_VIEW = State.View.ABSORB
+		
+		if(!listSelection.is_empty()):
+			$Gizmo.visible = true
+			update_gizmo()
+			if($Gizmo.overX && Input.is_action_just_pressed("click_gauche")):
+				xMotion = true
+				yMotion = false
+				zMotion = false
+			if($Gizmo.overY && Input.is_action_just_pressed("click_gauche")):
+				xMotion = false
+				yMotion = true
+				zMotion = false
+			if($Gizmo.overZ && Input.is_action_just_pressed("click_gauche")):
+				xMotion = false
+				yMotion = false
+				zMotion = true
+		else:
+			$Gizmo.visible = false
+			
+		if(Input.is_action_just_released("click_gauche")):
+			xMotion = false
 			yMotion = false
 			zMotion = false
-		if($Gizmo.overY && Input.is_action_just_pressed("click_gauche")):
-			xMotion = false
-			yMotion = true
-			zMotion = false
-		if($Gizmo.overZ && Input.is_action_just_pressed("click_gauche")):
-			xMotion = false
-			yMotion = false
-			zMotion = true
-	else:
-		$Gizmo.visible = false
-		
-	if(Input.is_action_just_released("click_gauche")):
-		xMotion = false
-		yMotion = false
-		zMotion = false
-		
-	if(xMotion):
-		move_pieces('x')
-	if(yMotion):
-		move_pieces('y')
-	if(zMotion):
-		move_pieces('z')
+			
+		if(xMotion):
+			move_pieces('x')
+		if(yMotion):
+			move_pieces('y')
+		if(zMotion):
+			move_pieces('z')
 
 func update_gizmo():
 	if listSelection.size() > 0:
