@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://6ou4f1qwuioe"]
+[gd_scene load_steps=8 format=3 uid="uid://6ou4f1qwuioe"]
 
 [ext_resource type="Script" path="res://UI/Screens/Editor.gd" id="1_kgirg"]
 [ext_resource type="FontFile" uid="uid://k44rcsfreskj" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_1ggqa"]
@@ -201,10 +201,10 @@ flat = true
 visible = false
 layout_mode = 1
 
-[connection signal="pressed" from="MarginContainer/HBoxContainer/SelectContainer/SelectButton" to="." method="_on_select_button_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/MoveContainer/MoveButton" to="." method="_on_move_button_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/NewCubeContainer/NewCubeButton" to="." method="_on_new_cube_button_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/EditShapeContainer/EditShapeButton" to="." method="_on_edit_shape_button_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/CameraContainer/CameraButton" to="." method="_on_camera_button_pressed"]
 [connection signal="chooseElement" from="ChooseElement" to="." method="_on_choose_element_choose_element"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/MoveContainer/MoveButton" to="." method="_on_move_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/SelectContainer/SelectButton" to="." method="_on_select_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/NewCubeContainer/NewCubeButton" to="." method="_on_new_cube_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/EditShapeContainer/EditShapeButton" to="." method="_on_edit_shape_button_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/CameraContainer/CameraButton" to="." method="_on_camera_button_pressed"]
 [connection signal="text" from="SaveField" to="." method="_on_save_field_text"]
