@@ -5,7 +5,7 @@
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_js5pq"]
 top_radius = 0.05
-bottom_radius = 0.05
+bottom_radius = 0.0
 radial_segments = 6
 rings = 1
 
@@ -49,11 +49,13 @@ script = ExtResource("1_u5etv")
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 1, 0, 0)
 
 [node name="bar" type="MeshInstance3D" parent="ArrowX"]
+sorting_offset = 1000.0
 mesh = SubResource("CylinderMesh_js5pq")
 surface_material_override/0 = SubResource("ShaderMaterial_ucpp3")
 
 [node name="tip" type="MeshInstance3D" parent="ArrowX"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+sorting_offset = 1000.0
 mesh = SubResource("CylinderMesh_rnvft")
 surface_material_override/0 = SubResource("ShaderMaterial_ucpp3")
 
@@ -70,11 +72,13 @@ shape = SubResource("BoxShape3D_jy2dy")
 transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 0, 1)
 
 [node name="bar" type="MeshInstance3D" parent="ArrowZ"]
+sorting_offset = 1000.0
 mesh = SubResource("CylinderMesh_js5pq")
 surface_material_override/0 = SubResource("ShaderMaterial_bevu0")
 
 [node name="tip" type="MeshInstance3D" parent="ArrowZ"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+sorting_offset = 1000.0
 mesh = SubResource("CylinderMesh_rnvft")
 surface_material_override/0 = SubResource("ShaderMaterial_b82ce")
 
@@ -91,11 +95,13 @@ shape = SubResource("BoxShape3D_jy2dy")
 transform = Transform3D(1.91069e-15, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, 0, 1.91069e-15, 0, 1, 0)
 
 [node name="bar" type="MeshInstance3D" parent="ArrowY"]
+sorting_offset = 1000.0
 mesh = SubResource("CylinderMesh_js5pq")
 surface_material_override/0 = SubResource("ShaderMaterial_b7qqa")
 
 [node name="tip" type="MeshInstance3D" parent="ArrowY"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+sorting_offset = 1000.0
 mesh = SubResource("CylinderMesh_rnvft")
 surface_material_override/0 = SubResource("ShaderMaterial_s3si4")
 
