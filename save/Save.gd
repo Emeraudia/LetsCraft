@@ -7,9 +7,8 @@ func _ready():
 	# path to the save on the system
 	path_to_save = OS.get_user_data_dir() + "/save/"
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 
@@ -19,6 +18,11 @@ func _process(delta):
 # dict of relevant variables.
 # if no file name is provide, use the name "lastSave"
 func save_piece(saveName : String = "lastSave"):
+	
+	if not DirAccess.dir_exists_absolute(path_to_save):
+		DirAccess.make_dir_absolute(path_to_save)
+
+	
 	var savePiece = FileAccess.open(path_to_save + saveName + ".save", FileAccess.WRITE)
 	var saveNodes = get_tree().get_nodes_in_group("Persist")
 	for node in saveNodes:
