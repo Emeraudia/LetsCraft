@@ -18,35 +18,36 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	
-	#creation de piece
-	#si on est en mode creation et que l'on fait un clique gauche
-	#on creer un piece
-	if(State.get_editor_mode() == State.EditorMode.Creation 
-		&& Input.is_action_just_pressed("click_gauche")):
-			
-		create_piece()
-	
-	#mouvement des pieces
-	#si la liste de selection n'est pas vide, que l'on fait un clique gauche et que l'on est sur le mode mouvement
-	#alors on peux bouger la piece
-	if(!listSelection.is_empty() 
-		&& Input.is_action_pressed("click_gauche") 
-		&& State.get_editor_mode() == State.EditorMode.Translation):
-			
-		move_pieces()
-	
-	#Suppresion des contraintes 
-	#les antennes sont insensibles jusqu'as ce qu'elle sorte d'une piece
-	if(Input.is_action_pressed("BreakContrainte")):
-		for s in listSelection:
-			s.removeAllContrainte()
-	if(Input.is_action_just_pressed("change_view")):
-		match(Piece_VIEW):
-			State.View.ABSORB:
-				Piece_VIEW = State.View.SELECT
-			State.View.SELECT:
-				Piece_VIEW = State.View.ABSORB
+		
+	if (State.get_input_mode() == State.InputMode.ACTIVATE):
+		#creation de piece
+		#si on est en mode creation et que l'on fait un clique gauche
+		#on creer un piece
+		if(State.get_editor_mode() == State.EditorMode.Creation 
+			&& Input.is_action_just_pressed("click_gauche")):
+				
+			create_piece()
+		
+		#mouvement des pieces
+		#si la liste de selection n'est pas vide, que l'on fait un clique gauche et que l'on est sur le mode mouvement
+		#alors on peux bouger la piece
+		if(!listSelection.is_empty() 
+			&& Input.is_action_pressed("click_gauche") 
+			&& State.get_editor_mode() == State.EditorMode.Translation):
+				
+			move_pieces()
+		
+		#Suppresion des contraintes 
+		#les antennes sont insensibles jusqu'as ce qu'elle sorte d'une piece
+		if(Input.is_action_pressed("BreakContrainte")):
+			for s in listSelection:
+				s.removeAllContrainte()
+		if(Input.is_action_just_pressed("change_view")):
+			match(Piece_VIEW):
+				State.View.ABSORB:
+					Piece_VIEW = State.View.SELECT
+				State.View.SELECT:
+					Piece_VIEW = State.View.ABSORB
 
 
 #fonction de creation d'une piece

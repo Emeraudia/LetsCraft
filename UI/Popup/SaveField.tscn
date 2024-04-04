@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddxv87tipm8lc"]
+
+[ext_resource type="Script" path="res://UI/Popup/SaveField.gd" id="1_ctku5"]
+
+[node name="SaveField" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ctku5")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="CancelButton" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 11.8
+placeholder_text = "enter a file name ..."
+
+[node name="ValidateButton" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-->"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/CancelButton" to="." method="_on_button_pressed"]
+[connection signal="focus_exited" from="MarginContainer/HBoxContainer/LineEdit" to="." method="_on_line_edit_focus_exited"]
+[connection signal="text_changed" from="MarginContainer/HBoxContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="MarginContainer/HBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/ValidateButton" to="." method="_on_validate_button_pressed"]

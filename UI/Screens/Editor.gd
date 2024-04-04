@@ -23,3 +23,11 @@ func _on_camera_button_pressed():
 func _on_choose_element_choose_element(title: String):
 	mode.emit("load",title)
 	$ChooseElement.visible = false;
+
+
+func _on_save_field_text(text):
+	mode.emit("save", text)
+	$SaveField.visible = false
+	
+func save():
+	$SaveField.visible = true

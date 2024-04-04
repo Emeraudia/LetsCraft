@@ -16,18 +16,20 @@ func _process(_delta):
 
 # Gestion des input pour les raccourcis clavier
 func selection_mode():
-	if (Input.is_action_pressed("selection")): # key b selection mode
-		State.set_editor_mode(State.EditorMode.Selection)
-	elif(Input.is_action_pressed("mouvement")): # key o pour activer le mouvement des pieces 
-		State.set_editor_mode(State.EditorMode.Translation)
-	elif(Input.is_action_pressed("Create")): #key c and left click to create a piece
-		State.set_editor_mode(State.EditorMode.Creation)
-	elif(Input.is_action_just_pressed("delete")): #key backspace pour supprimer la selection
-		$GestionPiece.delete_pieces()
-	elif(Input.is_action_just_pressed("save")): #key ctr+s save the piece's list
-		Save.save_piece()
-	elif(Input.is_action_just_pressed("load")): #key ctr+l load the last save (fast load)
-		Save.load_piece("/root/main/GestionPiece/PieceListe")
+	if (State.get_input_mode() == State.InputMode.ACTIVATE):
+		if (Input.is_action_pressed("selection")): # key b selection mode
+			State.set_editor_mode(State.EditorMode.Selection)
+		elif(Input.is_action_pressed("mouvement")): # key o pour activer le mouvement des pieces 
+			State.set_editor_mode(State.EditorMode.Translation)
+		elif(Input.is_action_pressed("Create")): #key c and left click to create a piece
+			State.set_editor_mode(State.EditorMode.Creation)
+		elif(Input.is_action_just_pressed("delete")): #key backspace pour supprimer la selection
+			$GestionPiece.delete_pieces()
+		elif(Input.is_action_just_pressed("save")): #key ctr+s save the piece's list
+			State.set_input_mode(State.InputMode.DEACTIVATE)
+			$Editor.save()
+		elif(Input.is_action_just_pressed("load")): #key ctr+l load the last save (fast load)
+			Save.load_piece("/root/main/GestionPiece/PieceListe")
 
 # Gestion des inputs via l'UI
 func _on_editor_mode(x,y):
@@ -48,3 +50,6 @@ func _on_editor_mode(x,y):
 		
 	if x=="load":
 		Save.load_piece("/root/main/GestionPiece/PieceListe", y)
+	
+	if x=="save" :
+		Save.save_piece(y)
