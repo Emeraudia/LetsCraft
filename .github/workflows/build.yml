@@ -18,8 +18,7 @@ jobs:
       
     - name: Setup
       run: |
-        mkdir -v -p build/linux ~/.local/share/godot/templates
-        mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/template/${GODOT_VERSION}.stable
+        mkdir -v -p build/linux
         
     - name: Build
       run: godot -v --export "Linux/X11" ./build/linux/${NAME}.x86_64
