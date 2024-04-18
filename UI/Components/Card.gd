@@ -32,3 +32,7 @@ func _on_gui_input(event):
 func setTitle(newTitle: String):
 	title = newTitle
 
+
+
+func _on_button_pressed():
+	cardEvent.emit(1001,title) # code 1001 = remove
