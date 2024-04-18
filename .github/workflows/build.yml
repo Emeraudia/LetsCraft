@@ -2,6 +2,7 @@ name: Build Godot Project
 on:
   release:
     types: [released]
+  workflow_dispatch:
 env:
   GODOT_VERSION: 4.2.1
   NAME: letscraft
