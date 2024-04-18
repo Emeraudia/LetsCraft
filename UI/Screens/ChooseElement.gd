@@ -16,6 +16,9 @@ func _process(delta):
 func _on_card_pressed(eventType, title):
 	if(eventType == Card.Event.PRESSED):
 		chooseElement.emit(title)
+	if(eventType == 1001): # code 1001 = remove
+		remove_save(title)
+		update()
 
 # get all the save files and store them in a var
 func update_save_dir():
@@ -32,6 +35,10 @@ func update_save_dir():
 	# enleve l'extension au nom de la sauvegarde
 	for i in range(saves.size()):
 		saves[i] = saves[i].left(saves[i].length()-5)
+
+func remove_save(title: String):
+	var dir = DirAccess.open("user://save")
+	dir.remove(title+".save")
 
 # creer une card et l'ajoute a la node
 func create_cards(title: String):

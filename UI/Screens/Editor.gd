@@ -22,7 +22,8 @@ func _on_camera_button_pressed():
 	mode.emit("camera","null")
 
 func _on_choose_element_choose_element(title: String):
-	mode.emit("load",title)
+	if title != "":
+		mode.emit("load",title)
 	$ChooseElement.visible = false;
 
 
